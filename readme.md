@@ -13,12 +13,11 @@ Remember to fork it and add the remotes for sissa and your fork
   git remote add my_fork git@github.com:my_username/P1.3_seed.git
 ```  
 
-New material will be uploaded frequently,
+New material will be uploaded frequently so run
 ```
   git pull --rebase sissa master
 ```
-
-in the morning.
+when needed.
 
 
 
