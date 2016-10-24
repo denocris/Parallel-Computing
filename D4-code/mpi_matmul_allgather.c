@@ -47,7 +47,7 @@ int main( int argc, char *argv[] ){
   C = (double *) malloc( size_in_bytes );
 
   // Initialization of matrices A and B to random values 
-  for( i = 0; i < size_loc; i++ ){
+  for( i = 0; i < size_loc*SIZE; i++ ){
 
     A[i] = (double) rand();
     B[i] = (double) rand();
