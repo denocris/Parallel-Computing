@@ -77,7 +77,7 @@ int main(int argc, char * argv[])
   MPI_Status status; // restituito dal Recv (bloccante)
   MPI_Request request; // va per le comunicazioni non bloccanti
 
-  const int N = 4;     // Global dimension
+  const int N = atoi(argv[1]);     // Global dimension
   const int n = N/comm_size; // Local dimension
 
   assert(N%comm_size == 0);

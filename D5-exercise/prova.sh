@@ -1,8 +1,10 @@
 #!/bin/bash
 
-ppn=16
+#ppn=18
+nodes=1
 
-for nodes in `seq 1 4`
+#for nodes in `seq 1 4`
+for ppn in seq `2 2 10`
 do
 
 target=tmp_`echo $nodes`_`echo $ppn`
