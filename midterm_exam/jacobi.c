@@ -14,6 +14,8 @@ void save_gnuplot(FILE *f, double **M, size_t dim);
 // return the elapsed time
 double wall_time(void);
 
+// end function declaration
+
 int main(int argc, char* argv[]){
 
   // check on input parameters
@@ -109,23 +111,12 @@ int main(int argc, char* argv[]){
 }
 
 void print_matrix(double**matrix, size_t dim){
-
-  size_t i,j;
-
-  printf("\t");
-  for(i=0;i<dim+2;++i){
-    printf("%zu\t",i);
-  }
   printf("\n");
-
-    
+  size_t i,j;
   for(i=0;i<dim+2;++i){
-    printf("%zu\t",i);
-    for(j=0;j<dim+2;++j){
+    for(j=0;j<dim+2;++j)
       printf("%f\t", matrix[i][j]);
-    }
     printf("\n");
-
   }
 }
 
