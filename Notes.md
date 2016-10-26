@@ -72,6 +72,41 @@ You must always pack tha data to be contigous (in C or Fortran this is different
 
 
 
+_________________________________________________________________
+
+code with pointers
+
+void loc_matmul( double *A, double * B, double * C, int loc_size)
+
+the following is the normal mat mul
+
+int i, j, k;
+for (i=0, i < loc_size;i++)
+for (j=0, j < loc_size;j++)
+for (k=0, k < loc_size;k++)
+C[(i*size)+j] += A[(i*size) + k]*B[(k*size) + j]
+
+Let us think in the case of:
+
+count = 0
+
+Initially my_block =  rank;
+
+A_block = A + (rank * loc_size);
+B_block = B;
+C_block = C;
+
+for(count=0; count<nprocs; count++){
+    
+
+
+
+loc_matmul( A_block, B_block, C_block, int loc_size)
+    B_block += loc_size;
+    C_block += loc_size
+    
+
+}
 
 
 

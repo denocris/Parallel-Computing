@@ -24,11 +24,11 @@ int main( int argc, char *argv[] ){
   size_t size_in_bytes;
   double *vector, *vector_total_manual_allreduce, *vector_total_allreduce, *buf_send, *buf_recv;
   double t_start, t_mine, t_manual_slowest, t_allreduce_slowest;
-  
+
   MPI_Init( &argc, &argv );
   MPI_Comm_rank( MPI_COMM_WORLD, &rank );
   MPI_Comm_size( MPI_COMM_WORLD, &nprocs );
-  
+
   next = ( rank + 1 ) % nprocs;
   prec = ( rank + nprocs - 1 ) % nprocs;
 
@@ -44,12 +44,12 @@ int main( int argc, char *argv[] ){
   for( i = 0; i < SIZE; i++ ) vector[i] = (double) rank;
   memset( vector_total_manual_allreduce, 0, size_in_bytes );
   memset( vector_total_allreduce, 0, size_in_bytes );
-  
+
   t_start = seconds();
 
   memcpy( buf_send, vector, size_in_bytes );
   memcpy( vector_total_manual_allreduce, vector, size_in_bytes );
-  
+
   for( count = 1; count < nprocs; count++ ){
 
     MPI_Isend( buf_send, SIZE, MPI_DOUBLE, next, rank, MPI_COMM_WORLD, &request );
@@ -84,9 +84,8 @@ int main( int argc, char *argv[] ){
   free( buf_recv );
   free( vector_total_manual_allreduce );
   free( vector_total_allreduce );
-  
+
   MPI_Finalize();
 
   return 0;
 }
-  
