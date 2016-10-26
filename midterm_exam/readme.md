@@ -1,7 +1,8 @@
 # MIDTERM EVALUATION
 ## Background
 
-You can find the explanation of the algorithm [**here**](./aux/jacobiBackground.html).
+Please refer to [background.md](./aux/background.md)
+
 
 ## Makefile
 - `make` to compile
@@ -12,7 +13,7 @@ You can find the explanation of the algorithm [**here**](./aux/jacobiBackground.
 
 
 ## Exercises
-1. Parallelize and optimize `jacobi.c` according to [**these suggestions**](./aux/JacobiExercise3.html)
+1. Parallelize and optimize `jacobi.c` according to [**these suggestions**](./aux/hints.md)
 2. Perform a performance analysis of the code scaling (matrix size 1024 and 4096)
 3. Write a report explaning what you have done and what you have understood. Push it on the master branch of your fork!
 
