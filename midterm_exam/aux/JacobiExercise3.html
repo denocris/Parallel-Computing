@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type">
+  <title>BlueWaters/TeraGrid Petascale Summer School - Jacobi Iteration
+Exercise 3</title>
+</head>
+<body>
+<h3><br>
+MPI&nbsp; - 1D
+Decomposition</h3>
+<h3><span style="font-weight: bold;"></span>Instructions</h3>
+The parameters of the algorithm are such:<br>
+<br>
+<ol>
+  <li>The grid matrix must be completely distributed, no replicating
+the matrix on all processors.<br>
+    <br>
+  </li>
+  <li>The whole process must be parallel, that includes initialization
+of the grid and boundary conditions.<br>
+    <br>
+  </li>
+  <li>Only asynchronous <a
+ href="http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Isend.html">MPI_Isend</a>
+and <a
+ href="http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Irecv.html">MPI_Irecv</a>
+can be used for communication between processors.<br>
+    <br>
+  </li>
+  <li>In this exercise, only use a 1 dimensional decomposition (see <a href="#Figure_2">Figure 2</a>).<br>
+  </li>
+</ol>
+<br>
+This is your first chance to design a parallel code from the
+start.&nbsp; Here is a guideline for the process that parallel
+programmers use to do this:<br>
+<ol>
+  <li>Study the serial algorithm and see where parallelism can be
+exploited.&nbsp; Also think about how the data can be divided.&nbsp;
+Best way to do this is on a piece of paper, drawing out the layout
+conceptually before you even touch the code.<br>
+    <br>
+  </li>
+  <li>Still on paper, figure out how this conceptualization moves to
+being expressed in the parallel programming language you want to
+use.&nbsp;&nbsp; What MPI calls do you need to use?&nbsp; Which
+processors will be doing what work?&nbsp; STILL ON PAPER.<br>
+    <br>
+  </li>
+  <li>Now begin programming the algorithm up in MPI.<br>
+    <br>
+  </li>
+  <li>Test the program on a small matrix and processor count to make
+sure it is doing what you expect it to do.&nbsp;<br>
+    <br>
+  </li>
+  <li>Once you are satisfied it works, scale it up.<br>
+  </li>
+</ol>
+With this in mind, go through this process to implement a 1-D
+decomposition of the Jacobi iteration algorithm.<br>
+<br>
+
+<h3>Tips</h3>
+<ul>
+  <li>To set up the initial matrix, you will need to figure out which
+values go in what chunk of the distributed matrix.&nbsp; This is not
+trivial.&nbsp; Many parallel programmers tend to forget that the
+initial setup if all part of the process, and in then end, can be a
+huge serial bottleneck in scaling up to 10000's core.&nbsp; No cutting
+corner!&nbsp; Think carefully about the data that each parallel chunk
+of work needs to have on
+it.<br>
+    <br>
+  </li>
+  <li>Notice the value of each matrix element depends on the
+adjacent elements from the previous matrix.&nbsp; In the distributed
+matrix, this has consequences for the boundary elements, in that if you
+straightforwardly divide the matrix up by rows, elements that are
+needed to compute a matrix element will reside on a different
+processor.&nbsp; Think carefully about how to allocate the piece of the
+matrix on the current processor, and what communication needs to be
+performed before computing the matrix elements.&nbsp; <a
+ href="#Figure_2">Figure 2</a>. is an illustration of one communication
+patter that can be used.<br>
+    <br>
+  </li>
+  <li>You should be able to complete this exercise without the <a
+ href="http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Barrier.html">MPI_Barrier
+    </a>call.<br>
+    <br>
+  </li>
+  <li>It may also helpful to write a function that will print the
+distributed matrix, so that you have the ability to check to see if
+things are going the way you want.<br>
+    <br>
+  </li>
+  <li>Keeping the MPI_Requests straight is key.&nbsp; You will need <a
+ href="http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Wait.html">MPI_Wait</a>
+calls to make sure all asynchronous calls have been completed before
+proceeding onto the computation of the matrix elements, and if
+you call MPI_Wait on ranks that have not had any communication calls,
+the program will lock.<br>
+    <br>
+  </li>
+  <li>Use the function <a
+ href="http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Wtime.html">MPI_Wtime</a>
+to time your code.<br>
+    <br>
+  </li>
+  <li>A reference of MPI routines can be found at: <a
+ href="http://www.mcs.anl.gov/research/projects/mpi/www/www3/">http://www.mcs.anl.gov/research/projects/mpi/www/www3/</a><br>
+  </li>
+</ul>
+<h3>Questions</h3>
+<ol>
+  <li>What are the inherent limitations of this algorithm?&nbsp; Are
+there constraints on the overall scalability and memory requirements?<br>
+    <br>
+  </li>
+  <li>One question that a parallel programmer must continually ask
+themselves is what is the scaling of the communication my parallel
+algorithm has.&nbsp; Can you come up with an analytic expression for
+the number of values that need to be communicated at each iteration of
+the Jacobi iteration algorithm?<br>
+    <br>
+  </li>
+  <li>Does the program scale? Are the results what you expected?&nbsp;
+If not, can you figure out why?<br>
+  </li>
+</ol>
+<br>
+<a name="Figure_2"></a><img style="width: 614px; height: 460px;"
+ alt="Figure 2"
+ src="jacobiFigure2.jpg"><br>
+<br>
+</body>
+</html>
