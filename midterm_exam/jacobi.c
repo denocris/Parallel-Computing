@@ -1,11 +1,17 @@
 #include <stdlib.h>
 #include <stdio.h>
-//#include <iostream>
 #include <time.h>
 #include <sys/time.h>
 
 // function declarations
+
+// print matrix to screen
 void print_matrix(double** M, size_t dim);
+
+// save matrix to file
+void save_gnuplot(FILE *f, double **M, size_t dim);
+
+// return the elapsed time
 double wall_time(void);
 
 int main(int argc, char* argv[]){
@@ -88,6 +94,10 @@ int main(int argc, char* argv[]){
   printf("\nelapsed time = %f seconds\n", time_end-time_start);
   printf("\nmatrix[%zu,%zu] = %f\n", row_peek, col_peek,
 	 matrix[row_peek+1][col_peek+1]);
+  FILE *file;
+  file = fopen("solution.dat", "w");
+  save_gnuplot(file,matrix,dimension);
+  fclose(file);
 
   for(i=0;i<dimension+2;++i){
     free(matrix[i]);
@@ -98,25 +108,33 @@ int main(int argc, char* argv[]){
   return 0;
 }
 
-void print_matrix(double**matrix, size_t dimension){
+void print_matrix(double**matrix, size_t dim){
 
   size_t i,j;
 
   printf("\t");
-  for(i=0;i<dimension+2;++i){
+  for(i=0;i<dim+2;++i){
     printf("%zu\t",i);
   }
   printf("\n");
 
     
-  for(i=0;i<dimension+2;++i){
+  for(i=0;i<dim+2;++i){
     printf("%zu\t",i);
-    for(j=0;j<dimension+2;++j){
+    for(j=0;j<dim+2;++j){
       printf("%f\t", matrix[i][j]);
     }
     printf("\n");
 
   }
+}
+
+void save_gnuplot(FILE *f, double **M, size_t dim){
+  size_t i,j;
+  const double h=0.1;
+  for (i=0; i<dim+2; ++i)
+    for (j=0; j<dim+2; ++j)
+      fprintf(f, "%f\t%f\t%f\n", h*i, h*j, M[i][j]);
 }
 
 // A Simple timer for measuring the walltime
