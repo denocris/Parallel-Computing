@@ -13,9 +13,13 @@ Please refer to [background.md](./aux/background.md)
 
 
 ## Exercises
-1. Parallelize and optimize `jacobi.c` following [**these assignments**](./aux/hints.md)
-2. Perform a performance analysis of the code scaling (matrix size 1024 and 4096)
-3. Write a report explaning what you have done and what you have understood. Push it on the master branch of your fork!
+1. Parallelize and optimize `jacobi.c` following
+   [**these assignments**](./aux/hints.md)
+
+2. Perform a performance analysis of the code scaling, provide
+   scalability charts and a brief explanation (matrix size 1000 and
+   8000, 10 iterations)
+
 
 ## Reference result (matrix size 60, 2000 iterations)
 
