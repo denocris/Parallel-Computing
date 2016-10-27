@@ -11,10 +11,12 @@ The parameters of the algorithm are such:
 2.  The whole process must be parallel, that includes initialization of
     the grid and boundary conditions.
     
-3.  Implement an efficient data exchange between processes
+3.  Implement an efficient data exchange between processes.
     
 4.  In this exercise, only use a 1 dimensional decomposition (see
     [Figure 2](#Figure_2)).
+	
+5.  Handle dimensions even if not multiple of the number of processes.
 
 
 Here is a guideline for the process that parallel programmers use to do
