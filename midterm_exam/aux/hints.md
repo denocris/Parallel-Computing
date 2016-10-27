@@ -11,17 +11,12 @@ The parameters of the algorithm are such:
 2.  The whole process must be parallel, that includes initialization of
     the grid and boundary conditions.
     
-3.  Only asynchronous
-    [MPI_Isend](http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Isend.html)
-    and
-    [MPI_Irecv](http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Irecv.html)
-    can be used for communication between processors.
+3.  Implement an efficient data exchange between processes
     
 4.  In this exercise, only use a 1 dimensional decomposition (see
     [Figure 2](#Figure_2)).
 
 
-This is your first chance to design a parallel code from the start.
 Here is a guideline for the process that parallel programmers use to do
 this:
 
@@ -49,12 +44,9 @@ decomposition of the Jacobi iteration algorithm.
 ### Tips
 
 -   To set up the initial matrix, you will need to figure out which
-    values go in what chunk of the distributed matrix. This is not
-    trivial. Many parallel programmers tend to forget that the initial
-    setup if all part of the process, and in then end, can be a huge
-    serial bottleneck in scaling up to 10000's core. No cutting
-    corner! Think carefully about the data that each parallel chunk of
-    work needs to have on it.
+    values go in what chunk of the distributed matrix. Think carefully
+    about the data that each parallel chunk of work needs to have on
+    it.
     
 -   Notice the value of each matrix element depends on the adjacent
     elements from the previous matrix. In the distributed matrix, this
@@ -67,25 +59,13 @@ decomposition of the Jacobi iteration algorithm.
     2](#Figure_2). is an illustration of one communication patter that
     can be used.
     
--   You should be able to complete this exercise without the
-    [MPI_Barrier](http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Barrier.html) call.
     
--   It may also helpful to write a function that will print the
-    distributed matrix, so that you have the ability to check to see if
-    things are going the way you want.
-    
--   Keeping the MPI_Requests straight is key. You will need
-    [MPI_Wait](http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Wait.html) calls to make sure all asynchronous calls have been completed before
-    proceeding onto the computation of the matrix elements, and if you
-    call MPI_Wait on ranks that have not had any communication calls,
-    the program will lock.
-    
--   Use the function
-    [MPI_Wtime](http://www.mcs.anl.gov/research/projects/mpi/www/www3/MPI_Wtime.html)
-    to time your code.
-    
+-   It is requested to write a function that will print the
+    distributed matrix, so that you have the ability to check to see
+    if things are going the way you want.
+        
 -   A reference of MPI routines can be found at:
-    <http://www.mcs.anl.gov/research/projects/mpi/www/www3/>
+    <http://mpi-forum.org/docs/mpi-1.1/mpi-11-html/node182.html>
 
 ### Questions
 
