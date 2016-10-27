@@ -1,6 +1,6 @@
 ## MPI - 1D Decomposition
 
-### Instructions
+### Assignments
 
 The parameters of the algorithm are such:
 
@@ -63,7 +63,10 @@ decomposition of the Jacobi iteration algorithm.
 -   It is requested to write a function that will print the
     distributed matrix, so that you have the ability to check to see
     if things are going the way you want.
-        
+
+-   To perform a data exchange with a “dummy” process you can use
+    [MPI_PROC_NULL](http://mpi-forum.org/docs/mpi-1.1/mpi-11-html/node53.html)
+
 -   A reference of MPI routines can be found at:
     <http://mpi-forum.org/docs/mpi-1.1/mpi-11-html/node182.html>
 
