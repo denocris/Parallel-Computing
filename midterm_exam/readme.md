@@ -17,8 +17,8 @@ Please refer to [background.md](./aux/background.md)
    [**these assignments**](./aux/hints.md)
 
 2. Perform a performance analysis of the code scaling, provide
-   scalability charts and a brief explanation (matrix size 1000 and
-   8000, 10 iterations)
+   scalability charts and a brief explanation (matrix size 1200 and
+   12000, 10 iterations)
 
 
 ## Reference result (matrix size 60, 2000 iterations)
