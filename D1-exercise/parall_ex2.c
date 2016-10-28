@@ -22,7 +22,8 @@ int main(int argc, char *argv[]){
   fprintf(stdout, "\nI am %d. Before point-2-point A[0]=%.3g \n", rank, A[0]);
 
 
-  for( r = 0; r < size; r++){
+  for( r = 0; r < size; r++)
+  {
     int curr = r;
     int next = (r+1)%size;
 
@@ -31,7 +32,7 @@ int main(int argc, char *argv[]){
     }
     else if( rank == next ){
     MPI_Recv( A, SIZE, MPI_DOUBLE, curr, 0, MPI_COMM_WORLD, &status);
-    fprintf(stdout, "\nI am %d. After %d point-2-point A[0]=%.3g \n", rank, r, A[0]);
+    fprintf(stdout, "\nI am %d. After r = %d point-2-point A[0]=%.3g \n", rank, r, A[0]);
     }
 
 

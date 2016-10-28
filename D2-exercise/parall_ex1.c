@@ -6,7 +6,6 @@
 int main(int argc, char *argv[]){
 
   int rank, size;
-  int i, num_steps, loc_sum, rec_rank;
   int NEXT, PREC;
 
   MPI_Status status;
@@ -16,20 +15,24 @@ int main(int argc, char *argv[]){
   MPI_Comm_rank( MPI_COMM_WORLD, &rank);
   MPI_Comm_size( MPI_COMM_WORLD, &size);
 
-  num_steps = size - 1;
-  loc_sum = rank;
 
+  int i, rec_rank;
+  int num_steps = size - 1;
+  int loc_sum = rank;
   int send_rank = rank;
+
 
   NEXT = (rank + 1) % size;
   PREC = (rank + size - 1) % size;
 
-  for( i = 0; i < num_steps; i++){
+  for( i = 0; i < num_steps; i++)
+  {
 
 
     MPI_Isend( &send_rank, 1, MPI_INT, NEXT, 0, MPI_COMM_WORLD, &request[0]);
 
     MPI_Irecv( &rec_rank, 1, MPI_INT, PREC, 0, MPI_COMM_WORLD, &request[1]);
+    //MPI_Recv( &rec_rank, 1, MPI_INT, PREC, 0, MPI_COMM_WORLD, &status);
 
     MPI_Waitall(2, request, MPI_STATUS_IGNORE);
 
@@ -37,13 +40,11 @@ int main(int argc, char *argv[]){
 
     //MPI_Waitall(2, request, MPI_STATUS_IGNORE);
 
-    printf("\n I am %d. At step %d, local_sum is %d \n, send_rank is %d, rec_rank is %d", rank, i,
+    printf("\n I am %d. At step %d, local_sum is %d, send_rank is %d, rec_rank is %d", rank, i,
     loc_sum, send_rank, rec_rank);
 
     send_rank = rec_rank;
-
-
-  }
+   }
 
   printf("\n I am %d. The number of steps is %d. The sum is %d \n", rank, num_steps, loc_sum);
 

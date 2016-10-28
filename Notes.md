@@ -109,6 +109,9 @@ loc_matmul( A_block, B_block, C_block, int loc_size)
 }
 
 
+ls mat_mult_cris.o* | xargs head -n2 | sed '/mat_mult/d' | sed '/Primary/d' | sed '/------/d' > strong.dat
+
+
 
 
 

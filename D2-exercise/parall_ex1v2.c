@@ -24,9 +24,8 @@ int main(int argc, char *argv[]){
   NEXT = (rank + 1) % size;
   PREC = (rank + size - 1) % size;
 
-  for( i = 0; i < num_steps; i++){
-
-
+  for( i = 0; i < num_steps; i++)
+  {
     MPI_Isend( &send_rank, 1, MPI_INT, NEXT, 0, MPI_COMM_WORLD, &request);
 
     MPI_Recv( &rec_rank, 1, MPI_INT, PREC, 0, MPI_COMM_WORLD, &status);
@@ -35,11 +34,10 @@ int main(int argc, char *argv[]){
 
     MPI_Wait(&request, &status);
 
-    printf("\n I am %d. At step %d, local_sum is %d \n, send_rank is %d, rec_rank is %d", rank, i,
-    loc_sum, send_rank, rec_rank);
+    printf("\n I am %d. At step %d, local_sum is %d, send_rank is %d, rec_rank is %d",
+    rank, i, loc_sum, send_rank, rec_rank);
 
     send_rank = rec_rank;
-
 
   }
 

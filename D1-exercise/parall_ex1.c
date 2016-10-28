@@ -31,7 +31,9 @@ int main(int argc, char *argv[]){
 
   fprintf(stdout, "\nI am %d. After point-2-point A[0]=%.3g \n", rank, A[0]);
 
-  for( i = 0; i < SIZE; i++) A[i] = rank;
+
+
+  for( i = 0; i < SIZE; i++) A[i] = rank + 2;
 
   if( rank==1 ){
   MPI_Send( A, SIZE, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);

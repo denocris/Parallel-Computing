@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
             printf("%f ", A[i*MAT_SIZE + j]);
           printf("\n");
       }
+      printf("_________________________________\n");
 
       double * B = malloc(loc_rows * MAT_SIZE * sizeof(double));
       int rec_rows = MAT_SIZE/size + 1;

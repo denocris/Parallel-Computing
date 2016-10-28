@@ -24,13 +24,20 @@ int main(int argc, char *argv[])
 
   MPI_Allgather(&to_send, 1, MPI_INT, recv_buff, 1, MPI_INT, MPI_COMM_WORLD);
 
-  
+
 
   //if( rank == size - 1)
-  if( rank == 0)
+  int r;
+  for( r = 0; r < size; r++)
   {
-    for( i = 0; i < size; i++)
-      printf("%d\n", recv_buff[i]);
+    if( rank == r)
+    {
+      printf("for rank = %d\n", r);
+      for( i = 0; i < size; i++)
+      {
+        printf("%d\n", recv_buff[i]);
+      }
+    }
   }
 
 

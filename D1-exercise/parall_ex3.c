@@ -16,11 +16,11 @@ int main(int argc, char *argv[]){
   MPI_Comm_size( MPI_COMM_WORLD, &size);
 
 
-  for( i = 0; i < size; i++) A[i] = rank;
-
   A = (int*)malloc(size*sizeof(int));
 
+  for( i = 0; i < size; i++) A[i] = rank;
 
+  //fprintf(stdout, "\nI am %d. Before point-2-point A[0]=%d \n", rank, A[0]);
 
   for( r = 1; r < size; r++){
 
@@ -34,12 +34,11 @@ int main(int argc, char *argv[]){
 
   }
 
-//   if( rank ==0 ){
-//   fprintf(stdout, "\nI am %d. After everything point-2-point A[0]=%d \n", rank, A[0]);
-//   fprintf(stdout, "\nI am %d. After everything point-2-point A[1]=%d \n", rank, A[1]);
-//   fprintf(stdout, "\nI am %d. After everything point-2-point A[2]=%d \n", rank, A[2]);
-//   fprintf(stdout, "\nI am %d. After everything point-2-point A[3]=%d \n", rank, A[3]);
-// }
+  if( rank ==0 )
+  {
+    for( i = 0; i < size; i++)
+   fprintf(stdout, "\nI am %d. After point-2-point A[%d]=%d \n", rank, rank, A[i]);
+  }
 
 
   MPI_Finalize();

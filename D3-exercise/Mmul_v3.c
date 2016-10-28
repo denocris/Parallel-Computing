@@ -18,7 +18,7 @@ void print_slice (int * slice, int glob_size, int loc_size)
     for(j=0; j < glob_size; j++)
       printf(" %d", slice[glob_size*i + j]);
     printf("\n");
-  }    
+  }
 
 }
 
@@ -34,12 +34,12 @@ void print_multinode_matrix( int * loc_slice,
   {
 
     printf("\n");
-    print_slice (loc_slice, glob_size, loc_size);
+    print_slice(loc_slice, glob_size, loc_size);
 
-    int i;
-    for (i = 1; i < mpi_size; i++)
+    int sender;
+    for (sender = 1; i < mpi_size; i++)
     {
-      MPI_Recv(loc_slice, glob_size*loc_size, MPI_INT, i, 0,  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      MPI_Recv(loc_slice, glob_size*loc_size, MPI_INT, sender, 0,  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       print_slice (loc_slice, glob_size, loc_size);
     }
 
@@ -47,7 +47,7 @@ void print_multinode_matrix( int * loc_slice,
 
   } else MPI_Send(loc_slice, glob_size*loc_size, MPI_INT, 0, 0, MPI_COMM_WORLD);
 
-}  
+}
 
 
 int main(int argc, char * argv[])
@@ -60,7 +60,7 @@ int main(int argc, char * argv[])
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-  const int N = 32;     // Global dimension
+  const int N = 8;     // Global dimension
   const int n = N/size; // Local dimension
 
   assert(N%size == 0);
@@ -74,25 +74,28 @@ int main(int argc, char * argv[])
   // Generation of the local slice
 
   int i;
-  for(i=0; i<N*n; i++) 
-    loc_A[i] = loc_B[i] = loc_C[i] = rank+1;
+  for(i=0; i<N*n; i++)
+  {
+    loc_A[i] = loc_B[i] = rank + 1;
+    loc_C[i] = 0;
+  }
 
-  // multi-node matrix-matrix multiplication 
+  // multi-node matrix-matrix multiplication
 
   int * recv_buff = malloc(N*sizeof(int));
   int * send_buff = malloc(n*sizeof(int));
 
-  // cycle on all columns 
-  int j, k; 
+  // cycle on all columns
+  int j, k;
   for (k=0; k < n; k++)
     for (j=0; j < N; j++)
     {
 
-      // fill send buffer 
+      // fill send buffer
       for(i = 0; i < n; i++)
-        send_buff[i] = loc_B[N*i+j];  
+        send_buff[i] = loc_B[N*i+j];
 
-      // ALLgather 
+      // ALLgather
       MPI_Allgather(send_buff, n, MPI_INT, recv_buff, n, MPI_INT, MPI_COMM_WORLD);
 
       // use recv buffer
@@ -117,4 +120,3 @@ int main(int argc, char * argv[])
   return 0;
 
 }
-
