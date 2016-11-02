@@ -27,6 +27,7 @@ void print_slice (double * slice, int glob_size, int loc_size)
 }
 
 
+
 void print_multinode_matrix( double * loc_slice,
                              int glob_size,
                              int loc_size,
@@ -57,6 +58,79 @@ void print_multinode_matrix( double * loc_slice,
 
 
 
+
+
+void gnuplot( double * loc_slice,
+                             int glob_size,
+                             int loc_size,
+                             int mpi_size,
+                             int rank )
+{
+
+  if(rank == 0)
+  {
+
+    FILE *file;
+    file = fopen( "solution.dat", "w+" );
+    const double h = 0.1;
+    int i, j, r;
+
+    double * tmp_slice = malloc(glob_size*(loc_size + 2)*sizeof(double));
+
+    for(i=0; i <= loc_size; i++)
+    {
+      for(j=0; j < glob_size; j++)
+      {
+        printf(" %f", loc_slice[glob_size*i + j]);
+        fprintf(file, "%f\t%f\t%f\n", h * (loc_size * r + i ), h * j, loc_slice[glob_size*i + j] );
+      }
+      printf("\n");
+
+    }
+      printf("\n");
+
+
+    int sender;
+
+    for(sender = 1; sender < mpi_size; sender++)
+    {
+      if( sender != mpi_size - 1 )
+      {
+        MPI_Recv(tmp_slice, glob_size*(loc_size + 2), MPI_DOUBLE, sender, 99,  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        for(i = 1; i <= loc_size; i++)
+        {
+          for(j = 0; j < glob_size; j++)
+          {
+            printf(" %f", tmp_slice[glob_size*i + j]);
+            fprintf(file, "%f\t%f\t%f\n", h * (loc_size * r + i ), h * j, tmp_slice[glob_size*i + j] );
+          }
+          printf("\n");
+        }
+      }
+      else
+      {
+        MPI_Recv(tmp_slice, glob_size*(loc_size + 2), MPI_DOUBLE, sender, 99,  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+        for(i = 1; i <= loc_size + 1; i++)
+        {
+          for(j=0; j < glob_size; j++)
+          {
+            printf(" %f", tmp_slice[glob_size*i + j]);
+            fprintf(file, "%f\t%f\t%f\n", h * (loc_size * r + i ), h * j, tmp_slice[glob_size*i + j] );
+          }
+        printf("\n");
+
+      }
+    }
+
+    printf("\n");
+
+
+  }
+  fclose( file );
+ }
+  else MPI_Send(loc_slice, glob_size*(loc_size + 2), MPI_DOUBLE, 0, 99, MPI_COMM_WORLD);
+}
 
 
 /*** end function declaration ***/
@@ -161,6 +235,8 @@ int main(int argc, char* argv[]){
 
 
   print_multinode_matrix(loc_matrix, N, loc_n_gh , size, rank);
+
+  gnuplot(loc_matrix, N, n , size, rank);
   //print_multinode_matrix2(loc_matrix, dimension, n , size, rank);
 
   MPI_Finalize();
