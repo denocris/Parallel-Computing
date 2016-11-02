@@ -15,9 +15,3 @@ for ((i=1; i<=16; i*=2)); do
     out=`OMP_NUM_THREADS=$i ./FastTr_omp $matrix_size | tail -1`
     echo "$i $out" >> data
 done￼
-
-
-
-
-￼
-
