@@ -7,8 +7,10 @@
 
 matrix_size=2048
 
+cd /home/cdenobi/P1.3_seed/Openmp/
+
 gcc -fopenmp FastTr_omp.c -o FastTr_omp
-data="/home/cdenobi/P1.3_seed/Openmp/data.dat"
+data="data.dat"
 echo > $data
 for ((i=1; i<=16; i*=2)); do
     echo $i
