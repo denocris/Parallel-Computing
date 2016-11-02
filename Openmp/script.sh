@@ -10,7 +10,7 @@ matrix_size=2048
 gcc -fopenmp FastTr_omp.c -o FastTr_omp
 data="data.dat"
 echo > $data
-for ((i=1; i<=16; i*=2)) ; do
+for ((i=1; i<=16; i*=2)); do
     echo $i
     out = `OMP_NUM_THREADS=$i ./FastTr_omp $matrix_size`
     time=tail -1 out
