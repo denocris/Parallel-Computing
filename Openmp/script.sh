@@ -12,10 +12,8 @@ data="data.dat"
 echo > $data
 for ((i=1; i<=16; i*=2)); do
     echo $i
-    out = `OMP_NUM_THREADS=$i ./FastTr_omp $matrix_size`
-    time=tail -1 out
-    echo $time
-    echo "$i $time" >> data
+    out=`OMP_NUM_THREADS=$i ./FastTr_omp $matrix_size | tail -1`
+    echo "$i $out" >> data
 done￼
 
 
