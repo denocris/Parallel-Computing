@@ -111,6 +111,29 @@ loc_matmul( A_block, B_block, C_block, int loc_size)
 
 ls mat_mult_cris.o* | xargs head -n2 | sed '/mat_mult/d' | sed '/Primary/d' | sed '/------/d' > strong.dat
 
+# SHARED MEMORY PROGRAMMING PARADIGM
+
+processes sharing data within the same memory space (therefore no message passing!): they are called threads
+
+negative side effect: 
+- our scaling is limited by one single system memory
+- is very common tha one thread is writing a message where the another is reading (rescondition)
+
+Processes & Threads
+
+When we have a process than we have also a threads.
+How they see the memory ?
+
+Stack: area where tmp data into a function the are stored 
+$: ulmit -s unlimited
+
+When we creates differents threads from a process, the threads ahve they private stack memory (every one have their own variables)
+
+Process
+Each process provides the resources needed to execute a program. A process has a virtual address space, executable code, open handles to system objects, a security context, a unique process identifier, environment variables, a priority class, minimum and maximum working set sizes, and at least one thread of execution. Each process is started with a single thread, often called the primary thread, but can create additional threads from any of its threads.
+
+Thread
+A thread is the entity within a process that can be scheduled for execution. All threads of a process share its virtual address space and system resources. In addition, each thread maintains exception handlers, a scheduling priority, thread local storage, a unique thread identifier, and a set of structures the system will use to save the thread context until it is scheduled. The thread context includes the thread's set of machine registers, the kernel stack, a thread environment block, and a user stack in the address space of the thread's process. Threads can also have their own security context, which can be used for impersonating clients.
 
 
 
