@@ -2,7 +2,7 @@
 #PBS -l nodes=6:ppn=20
 #PBS -l walltime=00:10:00
 
-cd parallel_prog_2
+cd /home/cdenobi/P1.3_seed/MPIandOpenmp
 
 module load gcc/4.8.2
 module load openmpi
