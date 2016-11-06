@@ -7,7 +7,7 @@ cd /home/cdenobi/P1.3_seed/MPIandOpenmp
 module load gcc/4.8.2
 module load openmpi
 
-size=$((16384))
+size=$((12000))
 touch matmul_scaling.txt
 echo "# **************** OMP=1 NP/node=20 ******************" >> matmul_scaling.txt
 export OMP_NUM_THREADS=1
