@@ -20,7 +20,7 @@ int idx = 0;
 //#pragma omp for collapse(2)
 //#pragma omp for private(i,j)
 
-#pragma omp for private(i,j) collapse(2) // set always to private indices of loops
+#pragma omp for private(i,j) //collapse(2) // set always to private indices of loops
 
 for( i = 0; i < 4; i++){
 	for(j = 0; j < 4; j++){

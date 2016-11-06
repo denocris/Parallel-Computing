@@ -8,8 +8,9 @@ int a=2, b=3;
 
 printf("Before parallerl region a=%d\t b=%d \n",a,b);
 
-#pragma omp parallel private(a) firstprivate(b)
+#pragma omp parallel private(a, b) //private(a) //firstprivate(b)
 {
+	//int b=5;
 	b = (omp_get_thread_num() % 2) *b;
 
 	printf("I am %d of %d threads. a=%d\t b=%d \n", omp_get_thread_num(), omp_get_num_threads(),a,b);

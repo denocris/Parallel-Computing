@@ -136,13 +136,32 @@ Thread
 A thread is the entity within a process that can be scheduled for execution. All threads of a process share its virtual address space and system resources. In addition, each thread maintains exception handlers, a scheduling priority, thread local storage, a unique thread identifier, and a set of structures the system will use to save the thread context until it is scheduled. The thread context includes the thread's set of machine registers, the kernel stack, a thread environment block, and a user stack in the address space of the thread's process. Threads can also have their own security context, which can be used for impersonating clients.
 
 
+USARE: /usr/local/gfortran/bin/gcc hello_world_omp.c -fopenmp
+
+
+
+bash -x ./script.sh  // USALO per vedere le varie righe dello script (utile per debug!!!)
+
+GNUPLOT:
+
+set term png
+set out "out.png"
+
+p "data.dat" u 1:2 w lp
 
 
 
 
+mpicc  -O3 -o mpi_matmul_allgather.x mpi_matmul_allgather.o -L/u/shared/programs/x86_64/mkl/11.1.3/composer_xe_2013_sp1.3.174/mkl/lib/intel64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -openmp
 
 
+CORES_PER_PROCESS=??
+PROCESSES_PER_NODE=??
+PROCESSES=??
+mpirun -np ${PROCESSES} --map-by ppr:${PROCESSES_PER_NODE}:node:pe=${CORES_PER_PROCESS} ./mpi_matmul_allgather.x
 
+
+mpirun -np 4 --map-by ppr:2:node:pe=10 ./a.out 2048
 
 
 
