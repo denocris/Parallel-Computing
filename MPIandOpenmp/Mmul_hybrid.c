@@ -72,7 +72,7 @@ int main(int argc, char * argv[])
   int rank, size;
 
   double t_start;
-  double t_solution;
+  double t_comp;
   double t_comm_start;
   double t_comm = 0;
 
@@ -137,7 +137,7 @@ int main(int argc, char * argv[])
       for(i = 0; i < N; i++)
         loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
 
-      t_solution = seconds() - t_start;
+      t_comp = seconds() - t_start;
 
     }
 
@@ -150,7 +150,7 @@ int main(int argc, char * argv[])
     //fprintf( stdout, "Time to sol = %e \n", t_solution );
     //fprintf( stdout, "Time to com = %.3g \n", t_comm );
     //fprintf( stdout, "time_sol \ttime_com\n");
-    fprintf( stdout, "%.3g \t", t_solution );
+    fprintf( stdout, "%.3g \t", t_comp );
     fprintf( stdout, "%.3g \n", t_comm );
   }
 
