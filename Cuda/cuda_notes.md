@@ -20,3 +20,6 @@ global function do not return values! So we have to use a reference.
 ls aa.o* | xargs cat $1 > new_file.txt
 
 ls aa.o* | xargs sed 's/a/cristiano/g' $1 | awk '/come/'
+
+
+module show cudatoolkit (then choose the PATH to samples)
