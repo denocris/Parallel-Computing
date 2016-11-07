@@ -9,6 +9,9 @@ module load gcc/4.8.2
 module load cudatoolkit
 
 
+
 cd /home/cdenobi/P1.3_seed/Cuda
+
+rm cuda_reverse.*
 
 ./a.out
