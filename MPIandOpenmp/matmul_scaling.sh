@@ -1,8 +1,13 @@
 #!/bin/bash
 #PBS -l nodes=6:ppn=20
 #PBS -l walltime=00:10:00
+#PBS -q reserved3
 
+
+module purge
+module load openmp
 cd /home/cdenobi/P1.3_seed/MPIandOpenmp
+
 
 size=$((12000))
 touch matmul_scaling.txt
