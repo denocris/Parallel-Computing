@@ -15,7 +15,7 @@ __global__ void vectorRev( int *A, int *B, int size)
 {
     int index = blockDim.x * blockIdx.x + threadIdx.x;
 
-    B[ index ] = A[ size - index ];
+    B[ index ] = A[ size - index - 1];
 }
 
 
@@ -71,6 +71,8 @@ int main( int argc, char * argv[])
 
   for( i = 0; i < SIZE; ++i )
     printf("%d", host_B[ i ]);
+
+  printf("\n");
 
   printf("-------------------------\n\n");
 
