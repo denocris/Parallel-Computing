@@ -11,7 +11,7 @@
 #define THREADS_PER_BLOCK 2
 
 
-__global__ void vectorRev( float *A, float *B)
+__global__ void vectorRev( int *A, int *B)
 {
     int index = blockDim.x * blockIdx.x + threadIdx.x;
 
