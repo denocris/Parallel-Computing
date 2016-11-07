@@ -53,7 +53,7 @@ int main( int argc, char * argv[])
 
   int threadsPerBlock = THREADS_PER_BLOCK;
   int blocksPerGrid =( SIZE ) / threadsPerBlock;
-  vectorAdd<<<blocksPerGrid, threadsPerBlock>>>(dev_A, dev_B);
+  vectorRev<<<blocksPerGrid, threadsPerBlock>>>(dev_A, dev_B);
 
   cudaMemcpy(host_B, dev_B, size_in_bytes, cudaMemcpyDeviceToHost);
 
