@@ -30,9 +30,6 @@ int main( int argc, char * argv[])
   int *host_A = (int *) malloc( size_in_bytes );
   int *host_B = (int *) malloc( size_in_bytes );
 
-  int *dev_A = cudaMalloc((void **)&dev_A, size_in_bytes);
-  int *dev_B = cudaMalloc((void **)&dev_B, size_in_bytes);
-
   // Initialize the host input vectors
   for( i = 0; i < SIZE; i++ ){
 
@@ -45,6 +42,9 @@ int main( int argc, char * argv[])
 
   for( i = 0; i < SIZE; ++i )
     printf("%d", host_B[ i ]);
+
+  int *dev_A = cudaMalloc((void **)&dev_A, size_in_bytes);
+  int *dev_B = cudaMalloc((void **)&dev_B, size_in_bytes);
 
 
   // copy inputs to device
