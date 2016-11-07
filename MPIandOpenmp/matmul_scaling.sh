@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l nodes=6:ppn=20
-#PBS -l walltime=00:10:00
+#PBS -l walltime=00:02:00
 #PBS -q reserved3
 
 
@@ -10,7 +10,7 @@ cd /home/cdenobi/P1.3_seed/MPIandOpenmp
 
 
 size=$((2400))
-touch matmul_scaling.txt
+rm -f matmul_scaling.txt
 echo "# **************** OMP=1 NP/node=20 ******************" > matmul_scaling.txt
 export OMP_NUM_THREADS=1
 for i in 20 60 120; do
