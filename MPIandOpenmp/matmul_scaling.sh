@@ -6,7 +6,7 @@ cd /home/cdenobi/P1.3_seed/MPIandOpenmp
 
 size=$((12000))
 touch matmul_scaling.txt
-echo "# **************** OMP=1 NP/node=20 ******************" >> matmul_scaling.txt
+echo "# **************** OMP=1 NP/node=20 ******************" > matmul_scaling.txt
 export OMP_NUM_THREADS=1
 for i in 20 60 120; do
 	mpirun -np $i --map-by ppr:20:node:pe=1 ./a.out $size >> matmul_scaling.txt
