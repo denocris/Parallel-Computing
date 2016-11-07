@@ -30,8 +30,8 @@ int main( int argc, char * argv[])
   int *host_A = (int *) malloc( size_in_bytes );
   int *host_B = (int *) malloc( size_in_bytes );
 
-  int *dev_A = cudaMalloc((void **)&dev_A, size_in_bytes)
-  int *dev_B = cudaMalloc((void **)&dev_B, size_in_bytes)
+  int *dev_A = cudaMalloc((void **)&dev_A, size_in_bytes);
+  int *dev_B = cudaMalloc((void **)&dev_B, size_in_bytes);
 
   // Initialize the host input vectors
   for( i = 0; i < SIZE; i++ ){
@@ -53,7 +53,7 @@ int main( int argc, char * argv[])
 
   int threadsPerBlock = THREADS_PER_BLOCK;
   int blocksPerGrid =( SIZE ) / threadsPerBlock;
-  vectorAdd<<<blocksPerGrid, threadsPerBlock>>>(dev_A, dev_B)
+  vectorAdd<<<blocksPerGrid, threadsPerBlock>>>(dev_A, dev_B);
 
   cudaMemcpy(host_B, dev_B, size_in_bytes, cudaMemcpyDeviceToHost);
 
