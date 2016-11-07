@@ -35,5 +35,6 @@ for i in 2 6 12; do
 
 echo "# **************** OMP=20 NP/node=1 ******************" >> matmul_scaling.txt
 export OMP_NUM_THREADS=20
+for i in 1 3 6; do
 	mpirun -np $i --map-by ppr:1:node:pe=20 ./a.out $size >> matmul_scaling.txt
 	done
