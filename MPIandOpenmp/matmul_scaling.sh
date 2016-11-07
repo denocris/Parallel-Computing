@@ -5,7 +5,7 @@
 
 
 module purge
-module load openmp
+module load openmpi
 cd /home/cdenobi/P1.3_seed/MPIandOpenmp
 
 
