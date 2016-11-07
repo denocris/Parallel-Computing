@@ -11,11 +11,11 @@
 #define THREADS_PER_BLOCK 2
 
 
-__global__ void vectorRev( int *A, int *B)
+__global__ void vectorRev( int *A, int *B, int size)
 {
     int index = blockDim.x * blockIdx.x + threadIdx.x;
 
-    A[ index ] = B[ SIZE - index ];
+    A[ index ] = B[ size - index ];
 }
 
 
@@ -25,6 +25,8 @@ int main( int argc, char * argv[])
 
   int i;
   int size_in_bytes = SIZE * sizeof(int);
+  int *dev_A;
+  int *dev_B;
 
   // Allocate the host input vector A
   int *host_A = (int *) malloc( size_in_bytes );
@@ -43,17 +45,17 @@ int main( int argc, char * argv[])
   for( i = 0; i < SIZE; ++i )
     printf("%d", host_B[ i ]);
 
-  int *dev_A = cudaMalloc((void **)&dev_A, size_in_bytes);
-  int *dev_B = cudaMalloc((void **)&dev_B, size_in_bytes);
+  cudaMalloc((void **)&dev_A, size_in_bytes);
+  cudaMalloc((void **)&dev_B, size_in_bytes);
 
 
   // copy inputs to device
   cudaMemcpy(dev_A, host_A, size_in_bytes, cudaMemcpyHostToDevice);
-  cudaMemcpy(dev_B, host_B, size_in_bytes, cudaMemcpyHostToDevice);
+  //cudaMemcpy(dev_B, host_B, size_in_bytes, cudaMemcpyHostToDevice);
 
   int threadsPerBlock = THREADS_PER_BLOCK;
   int blocksPerGrid =( SIZE ) / threadsPerBlock;
-  vectorRev<<<blocksPerGrid, threadsPerBlock>>>(dev_A, dev_B);
+  vectorRev<<<blocksPerGrid, threadsPerBlock>>>(dev_A, dev_B, SIZE);
 
   cudaMemcpy(host_B, dev_B, size_in_bytes, cudaMemcpyDeviceToHost);
 
