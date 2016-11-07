@@ -69,8 +69,10 @@ int main( int argc, char * argv[])
   cudaFree(dev_A);
   cudaFree(dev_B);
 
-  Free(host_A);
-  Free(host_B);
+  // Free host memory
+
+  free(host_A);
+  free(host_B);
 
   printf("Done\n");
   return 0;
