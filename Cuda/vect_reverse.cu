@@ -24,7 +24,7 @@ int main( int argc, char * argv[])
 {
 
   int i;
-  size_t size_in_bytes = SIZE * sizeof(int);
+  int size_in_bytes = SIZE * sizeof(int);
 
   // Allocate the host input vector A
   int *host_A = (int *) malloc( size_in_bytes );
