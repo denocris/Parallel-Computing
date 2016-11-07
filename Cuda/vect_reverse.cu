@@ -47,6 +47,9 @@ int main( int argc, char * argv[])
   for( i = 0; i < SIZE; ++i )
     printf("%d", host_B[ i ]);
 
+    printf("\n");
+
+
   cudaMalloc((void **)&dev_A, size_in_bytes);
   cudaMalloc((void **)&dev_B, size_in_bytes);
 
@@ -69,7 +72,7 @@ int main( int argc, char * argv[])
   for( i = 0; i < SIZE; ++i )
     printf("%d", host_B[ i ]);
 
-  printf("\n");
+  printf("-------------------------\n\n");
 
 
   cudaFree(dev_A);
