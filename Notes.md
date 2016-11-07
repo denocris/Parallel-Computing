@@ -163,6 +163,8 @@ mpirun -np ${PROCESSES} --map-by ppr:${PROCESSES_PER_NODE}:node:pe=${CORES_PER_P
 
 mpirun -np 4 --map-by ppr:2:node:pe=10 ./a.out 2048
 
+qsub ./script_sul_cluster.sh
+
 
 
 
