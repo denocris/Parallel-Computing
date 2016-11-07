@@ -69,6 +69,8 @@ int main( int argc, char * argv[])
   for( i = 0; i < SIZE; ++i )
     printf("%d", host_B[ i ]);
 
+  printf("\n");
+
 
   cudaFree(dev_A);
   cudaFree(dev_B);
