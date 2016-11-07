@@ -4,7 +4,11 @@
 #PBS -q reserved2
 #PBS -N cuda_reverse
 
+module purge
+module load gcc/4.8.2
+module load cudatoolkit
+
+
 cd /home/cdenobi/P1.3_seed/Cuda
 
-touch cuda_vectrev.txt
 ./a.out
