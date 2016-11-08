@@ -142,16 +142,13 @@ int main(int argc, char * argv[])
     }
 
 
-  // rank==0 print the matrix, rank!=0 send the matrix
-  //print_multinode_matrix(loc_C, N, n, size, rank);
-
   if( rank==0 )
   {
     //fprintf( stdout, "Time to sol = %e \n", t_solution );
     //fprintf( stdout, "Time to com = %.3g \n", t_comm );
     //fprintf( stdout, "time_sol \ttime_com\n");
     fprintf( stdout, "666\t %.3g \t", t_comp );
-    fprintf( stdout, "%.3g \n", t_comm );
+    fprintf( stdout, "%.3g \n", t_comm);
   }
 
   MPI_Finalize();
