@@ -1,5 +1,8 @@
 #!/bin/bash
-#PBS -l walltime=00:05:00
+#PBS -l nodes=6:ppn=20
+#PBS -l walltime=00:02:00
+#PBS -q reserved3
+
 
 # exec_name and output_name must be defined in master_script.sh
 cd $PBS_O_WORKDIR
