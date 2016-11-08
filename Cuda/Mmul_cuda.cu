@@ -18,8 +18,9 @@ __global__ void mat_mul( int *A, int *B, int *C, int size)
     int col = blockIdx.x * blockDim.x + threadIdx.x;
 
     //int tmp_sum = 0;
+    int k;
 
-    for (int k = 0; k < size; i++)
+    for (int k = 0; k < size; k++)
     {
     C[row * size + col]  += A[row * size + k] * B[k * size + col];
     }
