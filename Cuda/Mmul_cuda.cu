@@ -17,16 +17,17 @@ __global__ void mat_mul( int *A, int *B, int *C, int size)
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
 
-    //int tmp_sum = 0;
+    int tmp_sum = 0;
     int k;
 
-    while(row < size * size )
+    if (row < size && col < size) {
     for (k = 0; k < size; k++)
     {
-    C[row * size + col]  += A[row * size + k] * B[k * size + col];
+    tmp_sum  += A[row * size + k] * B[k * size + col];
     }
-    row+= gridDim.x * blockDim.x;
-    //C[ROW * N + COL] = tmp_sum;
+    //row+= gridDim.x * blockDim.x;
+  }
+    C[row * size + col] = tmp_sum;
 }
 
 
