@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -l nodes=4:ppn=20
-#PBS -l walltime=00:10:00
+#PBS -l nodes=1:ppn=20
+#PBS -l walltime=00:01:00
 #PBS -q reserved2
 #PBS -N cuda_reverse
 
