@@ -34,7 +34,7 @@ __global__ void mat_mul( int *A, int *B, int *C, int size)
 int main( int argc, char * argv[])
 {
 
-  int i, j, k;
+  int i, j;
   int size_in_bytes = SIZE * SIZE * sizeof(int);
   int *dev_A;
   int *dev_B;
