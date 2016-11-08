@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=02:00:00
+#PBS -l walltime=00:05:00
 
 # exec_name and output_name must be defined in master_script.sh
 cd $PBS_O_WORKDIR
@@ -11,7 +11,7 @@ do
 proc_per_res=$((10/$i))
 export OMP_NUM_THREADS=$i
 time=`mpirun --map-by ppr:$proc_per_res:socket:pe=$i ./$exec_name | grep 666`
-echo "$n $i $time" >> $output_name
+echo "$n $i $i" >> $output_name
 done
 
 # the output is printed with a trailing 666, so as to easily discard all lines of warning
