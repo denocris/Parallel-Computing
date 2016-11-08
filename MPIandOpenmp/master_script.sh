@@ -13,5 +13,5 @@ for i in `seq 1 $max_nodes`
 do
 output_name="data.$projname.n$i.size$mat_size.dat"
 rm -f $output_name
-qsub -v exec_name=$exec_name,output_name=$output_name,n=$i ./node_script.sh -l nodes=$i:ppn=20
+qsub -v exec_name=$exec_name,output_name=$output_name,n=$i,mat_size=$mat_size ./node_script.sh -l nodes=$i:ppn=20
 done

@@ -13,7 +13,7 @@ for i in $divisors
 do
 proc_per_res=$((10/$i))
 export OMP_NUM_THREADS=$i
-time=`mpirun --map-by ppr:$proc_per_res:socket:pe=$i ./$exec_name 1024 | grep 666`
+time=`mpirun --map-by ppr:$proc_per_res:socket:pe=$i ./$exec_name $mat_size | grep 666`
 echo "$n $i $time" >> $output_name
 done
 
