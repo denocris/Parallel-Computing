@@ -1,5 +1,4 @@
 #!/bin/bash
-#PBS -l nodes=6:ppn=20
 #PBS -l walltime=00:02:00
 #PBS -q reserved3
 
