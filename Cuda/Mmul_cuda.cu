@@ -13,21 +13,15 @@
 
 __global__ void mat_mul( int *A, int *B, int *C, int size)
 {
+    int thrIdx = blockIdx.x * blockDim.x + threadIdx.x;
 
-    int row = blockIdx.y * blockDim.y + threadIdx.y;
-    int col = blockIdx.x * blockDim.x + threadIdx.x;
-
-    int tmp_sum = 0;
     int k;
 
-    if (row < size && col < size) {
-    for (k = 0; k < size; k++)
-    {
-    tmp_sum  += A[row * size + k] * B[k * size + col];
-    }
-    //row+= gridDim.x * blockDim.x;
-  }
-    C[row * size + col] = tmp_sum;
+    while( thrIdx < size * size )
+      for( k = 0; k < size; k++ )
+        C[thrIdx] += A[blockIdx.x * blockDim.x + k] * B[ k * blockDim.x + thrIdx];
+
+    thrIdx += gridDim.x + blockDim.x;
 }
 
 
