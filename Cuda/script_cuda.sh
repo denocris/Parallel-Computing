@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l nodes=1:ppn=20
-#PBS -l walltime=00:01:00
+#PBS -l walltime=00:02:00
 #PBS -q reserved2
 #PBS -N cuda_run
 
@@ -11,6 +11,6 @@ module load cudatoolkit
 
 cd /home/cdenobi/P1.3_seed/Cuda
 
-rm cuda_run.*
+rm -f cuda_run.*
 
 ./a.out
