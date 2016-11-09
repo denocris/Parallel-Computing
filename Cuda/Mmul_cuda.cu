@@ -17,11 +17,11 @@ __global__ void mat_mul( int *A, int *B, int *C, int size)
 
     int k;
 
-    while( thrIdx < size * size )
+    //while( thrIdx < size * size )
       for( k = 0; k < size; k++ )
         C[thrIdx] += A[blockIdx.x * blockDim.x + k] * B[ k * blockDim.x + thrIdx];
 
-    thrIdx += gridDim.x + blockDim.x;
+    //thrIdx += gridDim.x + blockDim.x;
 }
 
 
