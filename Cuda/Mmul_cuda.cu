@@ -7,8 +7,8 @@
 #include <cuda_runtime.h>
 
 // SIZE is defined to be multiple of the number of threads
-#define SIZE 3
-#define THREADS_PER_BLOCK 3
+#define SIZE 4
+#define THREADS_PER_BLOCK 2
 
 
 __global__ void mat_mul( int *A, int *B, int *C, int size)
