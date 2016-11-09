@@ -19,7 +19,7 @@ __global__ void mat_mul( int *A, int *B, int *C, int size)
 
     //while( thrIdx < size * size )
     for( k = 0; k < size; k++ )
-      C[thrIdx] += A[blockIdx.x * blockDim.x + k] * B[ k * blockDim.x + thrIdx];
+      C[thrIdx] += A[blockIdx.x * blockDim.x + k] * B[ k * blockDim.x + threadIdx.x];
 
     //thrIdx += gridDim.x + blockDim.x;
 }
