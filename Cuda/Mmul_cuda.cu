@@ -73,6 +73,8 @@ int main( int argc, char * argv[])
   }
 
 
+
+
   cudaMalloc((void **)&dev_A, size_in_bytes);
   cudaMalloc((void **)&dev_B, size_in_bytes);
   cudaMalloc((void **)&dev_C, size_in_bytes);
