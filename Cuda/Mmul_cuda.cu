@@ -8,7 +8,7 @@
 
 // SIZE is defined to be multiple of the number of threads
 #define SIZE 4
-#define THREADS_PER_BLOCK 2
+#define THREADS_PER_BLOCK 4
 
 
 __global__ void mat_mul( int *A, int *B, int *C, int size)
@@ -18,8 +18,8 @@ __global__ void mat_mul( int *A, int *B, int *C, int size)
     int k;
 
     //while( thrIdx < size * size )
-      for( k = 0; k < size; k++ )
-        C[thrIdx] += A[blockIdx.x * blockDim.x + k] * B[ k * blockDim.x + thrIdx];
+    for( k = 0; k < size; k++ )
+      C[thrIdx] += A[blockIdx.x * blockDim.x + k] * B[ k * blockDim.x + thrIdx];
 
     //thrIdx += gridDim.x + blockDim.x;
 }
