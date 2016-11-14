@@ -1,6 +1,5 @@
 #!/bin/bash
 #PBS -l walltime=00:02:00
-#PBS -q reserved3
 
 
 # exec_name and output_name must be defined in master_script.sh
