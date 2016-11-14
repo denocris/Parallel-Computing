@@ -75,6 +75,8 @@ int main(int argc, char * argv[])
   double t_comp;
   double t_comm_start;
   double t_comm = 0;
+  double t_sol_slowest = 0;
+  double t_comm_slowest = 0;
 
   MPI_Init(&argc, &argv);
 
@@ -112,6 +114,7 @@ int main(int argc, char * argv[])
 
   int j, k;
 
+  t_start = seconds();
 
   for (k=0; k < n; k++)
     for (j=0; j < N; j++)
@@ -131,24 +134,23 @@ int main(int argc, char * argv[])
       loc_C[k*N + j] = 0;
 
 
-      t_start = seconds();
+      //t_start = seconds();
 
       #pragma omp parallel for private(i)
       for(i = 0; i < N; i++)
         loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
 
-      t_comp = seconds() - t_start;
-
     }
+
+t_sol = seconds() - t_start;
+
+      MPI_Reduce( &t_sol, &t_sol_slowest, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+      MPI_Reduce( &t_comm, &t_comm_slowest, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 
 
   if( rank==0 )
   {
-    //fprintf( stdout, "Time to sol = %e \n", t_solution );
-    //fprintf( stdout, "Time to com = %.3g \n", t_comm );
-    //fprintf( stdout, "time_sol \ttime_com\n");
-    fprintf( stdout, "152\t %.3g \t", t_comp );
-    //fprintf( stdout, "%.3g \n", t_comm);
+    fprintf( stdout, "152\t %.3g \t %.3g \t %.3g \t", t_sol_slowest, t_comm_slowest, t_sol_slowest - t_comm_slowest );
   }
 
   MPI_Finalize();
