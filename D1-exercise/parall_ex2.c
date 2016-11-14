@@ -41,6 +41,9 @@ int main(int argc, char *argv[]){
   fprintf(stdout, "\nI am %d. After everything point-2-point A[0]=%.3g \n", rank, A[0]);
 
   MPI_Finalize();
+
+  free(A);
+
   return 0;
 
 }

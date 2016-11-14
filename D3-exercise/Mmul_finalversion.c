@@ -34,12 +34,12 @@ void print_multinode_matrix( int * loc_slice,
   {
 
     printf("\n");
-    print_slice (loc_slice, glob_size, loc_size);
+    print_slice(loc_slice, glob_size, loc_size);
 
-    int i;
-    for (i = 1; i < mpi_size; i++)
+    int sender;
+    for (sender = 1; sender < mpi_size; sender++)
     {
-      MPI_Recv(loc_slice, glob_size*loc_size, MPI_INT, i, 0,  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      MPI_Recv(loc_slice, glob_size*loc_size, MPI_INT, sender, 0,  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       print_slice (loc_slice, glob_size, loc_size);
     }
 
@@ -60,7 +60,7 @@ int main(int argc, char * argv[])
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-  const int N = 32;     // Global dimension
+  const int N = 8;     // Global dimension
   const int n = N/size; // Local dimension
 
   assert(N%size == 0);
@@ -75,7 +75,10 @@ int main(int argc, char * argv[])
 
   int i;
   for(i=0; i<N*n; i++)
-    loc_A[i] = loc_B[i] = loc_C[i] = rank+1;
+  {
+    loc_A[i] = loc_B[i] = rank + 1;
+    loc_C[i] = 0;
+  }
 
   // multi-node matrix-matrix multiplication
 
@@ -84,24 +87,21 @@ int main(int argc, char * argv[])
 
   // cycle on all columns
   int j, k;
-  for (count=0; count < num_proc; count++)
-    for (i=0; i < loc_size; i++)
-    for (j=0; j < loc_size; j++)
+  for (k=0; k < n; k++)
+    for (j=0; j < N; j++)
     {
 
-      J_global = j + (loc_size * count),
-      B_block[(i*size_loc) + j] = B[(i*size) + J_global]
-    }
+      // fill send buffer
+      for(i = 0; i < n; i++)
+        send_buff[i] = loc_B[N*i+j];
 
       // ALLgather
-    MPI_Allgather(B_block, size_loc*size_loc, MPI_INT, recv_buff, size_loc*size_loc, MPI_INT, MPI_COMM_WORLD);
+      MPI_Allgather(send_buff, n, MPI_INT, recv_buff, n, MPI_INT, MPI_COMM_WORLD);
 
-  for(i = 0; i < size_loc; i++)
-      for(j = 0; j < size_loc; j++)
-        for(k = 0; k < size; k++)
-
-        J_global = j + (loc_size * count),
-        C[(i*size) + J_global] += A[(i*size) + k] * B_buff[(k*size_loc) + j]
+      // use recv buffer
+      loc_C[k*N + j] = 0;
+      for(i = 0; i < N; i++)
+        loc_C[k*N + j] += loc_A[k*N + i]*recv_buff[i];
 
     }
 

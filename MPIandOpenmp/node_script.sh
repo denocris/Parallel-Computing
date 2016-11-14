@@ -1,6 +1,5 @@
 #!/bin/bash
 #PBS -l walltime=00:02:00
-#PBS -q reserved3
 
 
 # exec_name and output_name must be defined in master_script.sh
@@ -12,8 +11,8 @@ for i in $divisors
 do
 proc_per_res=$((10/$i))
 export OMP_NUM_THREADS=$i
-time=`mpirun --map-by ppr:$proc_per_res:socket:pe=$i ./$exec_name $mat_size | grep 666`
+time=`mpirun --map-by ppr:$proc_per_res:socket:pe=$i ./$exec_name $mat_size | grep 152`
 echo "$n $i $time" >> $output_name
 done
 
-# the output is printed with a trailing 666, so as to easily discard all lines of warning
+# the output is printed with a trailing 152, so as to easily discard all lines of warning
