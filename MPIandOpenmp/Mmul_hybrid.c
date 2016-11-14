@@ -148,7 +148,7 @@ int main(int argc, char * argv[])
     //fprintf( stdout, "Time to com = %.3g \n", t_comm );
     //fprintf( stdout, "time_sol \ttime_com\n");
     fprintf( stdout, "152\t %.3g \t", t_comp );
-    fprintf( stdout, "%.3g \n", t_comm);
+    //fprintf( stdout, "%.3g \n", t_comm);
   }
 
   MPI_Finalize();
