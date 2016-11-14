@@ -14,5 +14,7 @@ for i in `seq 1 $max_nodes`
 do
 output_name="data.$projname.n$i.size$mat_size.dat"
 rm -f $output_name
+echo "ciao dal master1"
 qsub -v exec_name=$exec_name,output_name=$output_name,n=$i,mat_size=$mat_size ./node_script_c3h.sh -l nodes=$i:ppn=24
+echo "ciao dal master2"
 done

@@ -7,6 +7,7 @@ cd $PBS_O_WORKDIR
 module load openmpi
 
 divisors="1 2 4 6 12"
+echo "ciao"
 for i in $divisors
 do
 proc_per_res=$((24/$i))
