@@ -6,6 +6,7 @@ mat_size=$2
 # go up to 20480 if you want powers of 2 times 5, or up to 4*10^5 otherwise
 exec_name="$projname.$mat_size.x"
 
+module purge
 module load openmpi
 mpicc -fopenmp $projname.c -DMAT_SIZE=$mat_size -D__PRINT_TIME -o $exec_name
 
