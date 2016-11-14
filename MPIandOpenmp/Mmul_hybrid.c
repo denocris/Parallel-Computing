@@ -72,7 +72,7 @@ int main(int argc, char * argv[])
   int rank, size;
 
   double t_start;
-  double t_comp;
+  double t_sol;
   double t_comm_start;
   double t_comm = 0;
   double t_sol_slowest = 0;
