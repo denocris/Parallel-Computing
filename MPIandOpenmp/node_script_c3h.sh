@@ -9,9 +9,9 @@ module load openmpi
 divisors="1 2 4 6 12"
 for i in $divisors
 do
-proc_per_res=$((12/$i))
+proc_per_res=$((24/$i))
 export OMP_NUM_THREADS=$i
-time=`mpirun --map-by ppr:$proc_per_res:socket:pe=$i ./$exec_name $mat_size | grep 152`
+time=`mpirun --map-by ppr:$proc_per_res:node:pe=$i ./$exec_name $mat_size | grep 152`
 echo "$n $i $time" >> $output_name
 done
 
