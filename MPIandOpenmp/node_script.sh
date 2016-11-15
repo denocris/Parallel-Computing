@@ -6,6 +6,10 @@
 cd $PBS_O_WORKDIR
 module load openmpi
 
+export OMP_NUM_THREADS=1
+time_serial=`mpirun -np 1 ./$exec_name $mat_size | grep 152`
+echo "$time_serial" >> time_serial_size$mat_size.dat
+
 divisors="1 2 4 5 10"
 for i in $divisors
 do
