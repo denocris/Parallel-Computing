@@ -14,8 +14,8 @@ echo "$time_serial" >> time_serial_size$mat_size.dat
 for num_core_per_proc in "1 2 4 5 10"
 do
     export OMP_NUM_THREADS=$num_core_per_proc
-    proc_per_res=$((20/$i))
-    tot_pros=$((20*$num_nods/$i))
+    proc_per_res=$((20/$num_core_per_proc))
+    tot_pros=$((20*$num_nods/$num_core_per_proc))
     time=`mpirun -np $tot_pros --map-by ppr:$proc_per_res:node:pe=$num_core_per_proc ./$exec_name $mat_size | grep 152`
     echo "$num_nods $num_core_per_proc $tot_pros $time" >> $output_name
 done
