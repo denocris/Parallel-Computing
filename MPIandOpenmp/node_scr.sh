@@ -10,8 +10,8 @@ export OMP_NUM_THREADS=1
 time_serial=`mpirun -np 1 ./$exec_name $mat_size | grep 152`
 echo "$time_serial" >> time_serial_size$mat_size.dat
 
-
-for num_core_per_proc in "1 2 4 5 10"
+list="1 2 4 5 10"
+for num_core_per_proc in $list
 do
     export OMP_NUM_THREADS=$num_core_per_proc
     proc_per_res=$((20/$num_core_per_proc))
