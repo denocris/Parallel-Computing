@@ -9,7 +9,7 @@ exec_name="$projname.$mat_size.x"
 module load openmpi
 mpicc -fopenmp $projname.c -DMAT_SIZE=$mat_size -D__PRINT_TIME -o $exec_name
 
-for i in `seq 1 $max_nodes`
+for i in `seq 1 $max_nodes`  
 do
 output_name="data.$projname.n$i.size$mat_size.dat"
 rm -f $output_name
