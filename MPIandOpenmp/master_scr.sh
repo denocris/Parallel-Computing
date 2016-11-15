@@ -13,5 +13,5 @@ for num_nods in `seq 1 $max_nodes`
 do
   output_name="timedata.$projname.n$num_nods.size$mat_size.dat"
   rm -f $output_name
-  qsub -v exec_name=$exec_name,output_name=$output_name,num_nods=$num_nods,mat_size=$mat_size ./node_script.sh -l nodes=$num_nods:ppn=20
+  qsub -v exec_name=$exec_name,output_name=$output_name,num_nods=$num_nods,mat_size=$mat_size ./node_scr.sh -l nodes=$num_nods:ppn=20
 done
