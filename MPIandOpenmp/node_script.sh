@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=00:10:00
+#PBS -l walltime=00:30:00
 
 
 # exec_name and output_name must be defined in master_script.sh
