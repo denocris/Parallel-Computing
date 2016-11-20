@@ -117,7 +117,8 @@ int main(int argc, char * argv[])
   t_start = seconds();
 
 
-  for (k=0; k < n; k++)
+  for (k=0; k < n; k++){
+    #pragma omp parallel for private(j)
     for (j=0; j < N; j++)
     {
 
@@ -142,7 +143,8 @@ int main(int argc, char * argv[])
         loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
 
     }
-  
+  }
+
 
   t_sol = seconds() - t_start;
 
@@ -155,9 +157,9 @@ int main(int argc, char * argv[])
     fprintf( stdout, "152\t %.3g \t %.3g \t %.3g \t", t_sol_slowest, t_comm_slowest, t_sol_slowest - t_comm_slowest );
   }
 
-  print_multinode_matrix(loc_A, N, n, size, rank);
-  print_multinode_matrix(loc_B, N, n, size, rank);
-  print_multinode_matrix(loc_C, N, n, size, rank);
+  //print_multinode_matrix(loc_A, N, n, size, rank);
+  //print_multinode_matrix(loc_B, N, n, size, rank);
+  //print_multinode_matrix(loc_C, N, n, size, rank);
 
   MPI_Finalize();
 
