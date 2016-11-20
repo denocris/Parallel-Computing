@@ -116,9 +116,8 @@ int main(int argc, char * argv[])
 
   t_start = seconds();
 
-
+  #pragma omp parallel for private(k,j)
   for (k=0; k < n; k++){
-    //#pragma omp parallel for private(j)
     for (j=0; j < N; j++)
     {
 
@@ -138,7 +137,7 @@ int main(int argc, char * argv[])
 
       //t_start = seconds();
 
-      #pragma omp parallel for private(i)
+      //#pragma omp parallel for private(i)
       for(i = 0; i < N; i++)
         loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
 
