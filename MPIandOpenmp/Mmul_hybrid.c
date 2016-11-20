@@ -118,7 +118,7 @@ int main(int argc, char * argv[])
 
 
   for (k=0; k < n; k++){
-    #pragma omp parallel for private(j)
+    //#pragma omp parallel for private(j)
     for (j=0; j < N; j++)
     {
 
