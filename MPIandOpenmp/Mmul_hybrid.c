@@ -116,6 +116,7 @@ int main(int argc, char * argv[])
 
   t_start = seconds();
 
+  #pragma omp parallel for private(k,j)
   for (k=0; k < n; k++)
     for (j=0; j < N; j++)
     {
@@ -142,10 +143,10 @@ int main(int argc, char * argv[])
 
     }
 
-t_sol = seconds() - t_start;
+  t_sol = seconds() - t_start;
 
-      MPI_Reduce( &t_sol, &t_sol_slowest, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-      MPI_Reduce( &t_comm, &t_comm_slowest, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+  MPI_Reduce( &t_sol, &t_sol_slowest, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+  MPI_Reduce( &t_comm, &t_comm_slowest, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 
 
   if( rank==0 )
