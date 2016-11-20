@@ -117,13 +117,11 @@ int main(int argc, char * argv[])
   t_start = seconds();
 
 
-  for (k=0; k < n; k++){
-    //#pragma omp parallel for private(j)
+  for (k=0; k < n; k++)
     for (j=0; j < N; j++)
     {
 
       // fill send buffer
-      //#pragma omp parallel for private(i)
       for(i = 0; i < n; i++)
         send_buff[i] = loc_B[N*i+j];
 
@@ -144,7 +142,7 @@ int main(int argc, char * argv[])
         loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
 
     }
-  }
+  
 
   t_sol = seconds() - t_start;
 
