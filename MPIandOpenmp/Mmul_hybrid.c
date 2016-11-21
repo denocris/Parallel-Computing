@@ -110,6 +110,7 @@ int main(int argc, char * argv[])
 
   // cycle on all columns
 
+  #pragma omp parallel
 
 
   int j, k;
