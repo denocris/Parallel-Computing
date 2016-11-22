@@ -152,6 +152,10 @@ int main(int argc, char * argv[])
       }
 
   t_start = seconds();
+
+#pragma omp parallel private(i,j,k){
+
+    #pragma omp for
     for (k=0; k < n; k++)
       for (j=0; j < N; j++)
       {
@@ -161,14 +165,11 @@ int main(int argc, char * argv[])
 
         loc_C[k*N + j] = 0;
 
-        #pragma omp parallel for private(i)
         for(i = 0; i < N; i++)
           loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
 
       }
-
-
-
+    }
   t_sol = seconds() - t_start;
 
   MPI_Reduce( &t_sol, &t_sol_slowest, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
