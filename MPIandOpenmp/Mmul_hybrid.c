@@ -143,6 +143,7 @@ int main(int argc, char * argv[])
 
     }*/
 
+    t_start = seconds();
 
     for (j=0; j < N; j++)
       {
@@ -163,21 +164,11 @@ int main(int argc, char * argv[])
       loc_C[k*N + j] = 0;
     }
 
-  t_start = seconds();
   #pragma omp parallel private(k,j,i)
   {
     #pragma omp for
     for (k=0; k < n; k++)
       for (j=0; j < N; j++){
-
-        int m;
-        for(m = 0; m < n; m++)
-          send_buff[m] = loc_B[N*m + j];
-
-          t_comm_start = seconds();
-          MPI_Allgather(send_buff, n, MPI_INT, recv_buff, n, MPI_INT, MPI_COMM_WORLD);
-          t_comm += seconds() - t_comm_start;
-
         for(i = 0; i < N; i++)
           loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
         }
