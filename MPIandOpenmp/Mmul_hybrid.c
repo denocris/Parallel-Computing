@@ -149,27 +149,28 @@ int main(int argc, char * argv[])
         int m;
         for(m = 0; m < n; m++)
           send_buff[m] = loc_B[N*m + j];
+
+          t_comm_start = seconds();
+          MPI_Allgather(send_buff, n, MPI_INT, recv_buff, n, MPI_INT, MPI_COMM_WORLD);
+          t_comm += seconds() - t_comm_start;
       }
 
-  t_start = seconds();
 
+
+  for (k=0; k < n; k++)
+    for (j=0; j < N; j++)
+    {
+      loc_C[k*N + j] = 0;
+    }
+  t_start = seconds();
   #pragma omp parallel private(k,j,i)
   {
     #pragma omp for
     for (k=0; k < n; k++)
       for (j=0; j < N; j++)
-      {
-        t_comm_start = seconds();
-        MPI_Allgather(send_buff, n, MPI_INT, recv_buff, n, MPI_INT, MPI_COMM_WORLD);
-        t_comm += seconds() - t_comm_start;
-
-        loc_C[k*N + j] = 0;
-
         for(i = 0; i < N; i++)
           loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
-
-      }
-    }
+}
   t_sol = seconds() - t_start;
 
   MPI_Reduce( &t_sol, &t_sol_slowest, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
