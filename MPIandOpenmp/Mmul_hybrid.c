@@ -153,7 +153,7 @@ int main(int argc, char * argv[])
 
   t_start = seconds();
 
-#pragma omp parallel private(i,j,k){
+    #pragma omp parallel private(i,j,k){
 
     #pragma omp for
     for (k=0; k < n; k++)
@@ -192,8 +192,8 @@ int main(int argc, char * argv[])
   free(loc_B);
   free(loc_C);
 
-  free(recv_buff);
-  free(send_buff);
+  //free(recv_buff);
+  //free(send_buff);
 
   return 0;
 
