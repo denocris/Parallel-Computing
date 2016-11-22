@@ -178,7 +178,6 @@ int main(int argc, char * argv[])
           MPI_Allgather(send_buff, n, MPI_INT, recv_buff, n, MPI_INT, MPI_COMM_WORLD);
           t_comm += seconds() - t_comm_start;
 
-        #pragma omp for
         for(i = 0; i < N; i++)
           loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
         }
