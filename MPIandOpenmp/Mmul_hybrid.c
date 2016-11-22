@@ -136,7 +136,7 @@ int main(int argc, char * argv[])
       loc_C[k*N + j] = 0;
 
 
-      #pragma omp parallel for private(i)
+      //#pragma omp parallel for private(i)
       for(i = 0; i < N; i++)
         loc_C[k*N + j] += loc_A[k*N + i] * recv_buff[i];
 
