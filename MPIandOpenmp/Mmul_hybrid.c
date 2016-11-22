@@ -122,7 +122,7 @@ int main(int argc, char * argv[])
 
       // fill send buffer
       int m;
-      for(m = 0; m < n; i++)
+      for(m = 0; m < n; m++)
         send_buff[m] = loc_B[N*m + j];
 
 
