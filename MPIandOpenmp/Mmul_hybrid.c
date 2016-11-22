@@ -114,8 +114,6 @@ int main(int argc, char * argv[])
 
   int j, k;
 
-  #pragma omp parallel
-
   t_start = seconds();
 
   for (k=0; k < n; k++)
