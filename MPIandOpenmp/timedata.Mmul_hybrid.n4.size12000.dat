@@ -1,5 +1,9 @@
-4 1 80 152	 1.18e+03 	 1.05e+03 	 125 	
-4 2 40 152	 924 	 758 	 165 	
-4 4 20 152	 1.11e+03 	 812 	 300 	
-4 5 16 152	 1.17e+03 	 776 	 390 	
-4 10 8 152	 1.9e+03 	 1.05e+03 	 852 	
+4 1 80 cn04-20.15274ipath_userinit: Mismatched user minor version (12) and driver minor version (11) while context sharing. Ensure that driver and library are from the same release.
+cn04-20.15273ipath_userinit: Mismatched user minor version (12) and driver minor version (11) while context sharing. Ensure that driver and library are from the same release.
+cn04-20.15275ipath_userinit: Mismatched user minor version (12) and driver minor version (11) while context sharing. Ensure that driver and library are from the same release.
+cn04-20.15276ipath_userinit: Mismatched user minor version (12) and driver minor version (11) while context sharing. Ensure that driver and library are from the same release.
+152	 111 	 5.25 	 106 	
+4 2 40 152	 107 	 2.21 	 105 	
+4 4 20 152	 121 	 1.15 	 120 	
+4 5 16 152	 106 	 1 	 105 	
+4 10 8 152	 106 	 0.717 	 105 	
