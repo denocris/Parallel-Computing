@@ -1,5 +1,9 @@
-5 1 100 152	 11.9 	 1.39 	 10.6 	
-5 2 50 152	 11.3 	 0.715 	 10.5 	
-5 4 25 152	 15.7 	 0.395 	 15.3 	
-5 5 20 152	 10.9 	 0.357 	 10.5 	
-5 10 10 152	 10.8 	 0.316 	 10.5 	
+5 1 100 cn07-29.15271ipath_userinit: Mismatched user minor version (12) and driver minor version (11) while context sharing. Ensure that driver and library are from the same release.
+cn07-29.15272ipath_userinit: Mismatched user minor version (12) and driver minor version (11) while context sharing. Ensure that driver and library are from the same release.
+cn07-29.15273ipath_userinit: Mismatched user minor version (12) and driver minor version (11) while context sharing. Ensure that driver and library are from the same release.
+cn07-29.15270ipath_userinit: Mismatched user minor version (12) and driver minor version (11) while context sharing. Ensure that driver and library are from the same release.
+152	 11.9 	 1.3 	 10.6 	
+5 2 50 152	 11.2 	 0.699 	 10.5 	
+5 4 25 152	 15.6 	 0.39 	 15.2 	
+5 5 20 152	 10.8 	 0.346 	 10.5 	
+5 10 10 152	 10.8 	 0.302 	 10.5 	
