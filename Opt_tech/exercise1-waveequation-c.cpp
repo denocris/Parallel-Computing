@@ -40,8 +40,8 @@ int main(void){
   }*/
 
   // In Array Notation
-  f1[:] = 0;
-  f2[:] = 0;
+  f1[0:size] = 0;
+  f2[0:size] = 0;
 
   // make some delta peaks
   f1[size/2]=0.1;
@@ -55,7 +55,7 @@ int main(void){
     }*/
     // In Array Notation
     f2[1:size-1]=a*(f1[2:size]+f1[0:size-2])+b*f1[1:size-1]-f2[1:size-1];
-    
+
     tmpptr=f1;
     f1=f2;
     f2=tmpptr;
