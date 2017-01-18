@@ -47,23 +47,23 @@ int main(void){
     c[i]=rand();
   }
 
-  time1_N=mytime();
-  for(int n=0;n<iter;n++){
-    for(int i=0;i<size; i++)
-      for(int j=0;j<size; j++)
-        for(int k=0;k<size; k++){
-      c[i][j] +=  a[i][k]*b[k][j];
-    }
-  }
-  time2_N=mytime();
-
-  // time1_AN=mytime();
+  // time1_N=mytime();
   // for(int n=0;n<iter;n++){
-  //   for(int i=0;i<size; i++){
-  //     c[i]+=a[i][0:size]*b[0:size][i];
+  //   for(int i=0;i<size; i++)
+  //     for(int j=0;j<size; j++)
+  //       for(int k=0;k<size; k++){
+  //     c[i][j] +=  a[i][k]*b[k][j];
   //   }
   // }
-  // time2_AN=mytime();
+  // time2_N=mytime();
+
+  time1_AN=mytime();
+  for(int n=0;n<iter;n++){
+    for(int i=0;i<size; i++){
+      c[i][:]+=a[i][0:size]*b[0:size][i];
+    }
+  }
+  time2_AN=mytime();
 
 
 
