@@ -20,7 +20,7 @@ void matrixmul_mnk(double* c,double* a,double* b){
 
 int main(void){
   int iter=10;
-  int nmatrices=100;
+  int nmatrices=100000;
   int size=mnk*mnk*nmatrices;
   double* a= (double*) _mm_malloc(sizeof(double)*size,64);
   double* b= (double*) _mm_malloc(sizeof(double)*size,64);
@@ -58,8 +58,9 @@ int main(void){
   // time2_N=mytime();
 
   time1_AN=mytime();
-  for(int n=0;n<iter;n++){
+  for(int m=0;m<iter;m++){
   for(int n=0;n<nmatrices;n++){
+
     for(int i=0; i<4; i++)
       for(int k=0; k<4; k++){
         c[i*4:4]+=a[i*4 + k]*b[k*4:4];
