@@ -34,10 +34,15 @@ int main(void){
   b=2*(1-a);
 
   // initialize to zero
-  for(int i=0;i<size;i++){
+  /*for(int i=0;i<size;i++){
     f1[i]=0;
     f2[i]=0;
-  }
+  }*/
+
+  // In Array Notation
+  f1[:] = 0;
+  f2[:] = 0;
+
   // make some delta peaks
   f1[size/2]=0.1;
   f2[size/2]=-0.1;
