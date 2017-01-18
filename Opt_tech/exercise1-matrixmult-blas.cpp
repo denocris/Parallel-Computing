@@ -18,6 +18,13 @@ void matrixmul_mnk(double* c,double* a,double* b){
 	      mnk, mnk, mnk, 1, a, mnk, b, mnk, 1, c, mnk);
 }
 
+void matrixmul_mnk_AN(double* c,double* a,double* b){
+    for(int i=0; i<4; i++)
+      for(int k=0; k<4; k++){
+        c[i*4:4]+=a[i*4 + k]*b[k*4:4];
+      }
+}
+
 int main(void){
   int iter=10;
   int nmatrices=100000;
@@ -47,26 +54,12 @@ int main(void){
     c[i]=rand();
   }
 
-  // time1_N=mytime();
-  // for(int n=0;n<iter;n++){
-  //   for(int i=0;i<size; i++)
-  //     for(int j=0;j<size; j++)
-  //       for(int k=0;k<size; k++){
-  //     c[i][j] +=  a[i][k]*b[k][j];
-  //   }
-  // }
-  // time2_N=mytime();
 
   time1_AN=mytime();
-  for(int m=0;m<iter;m++){
-  for(int n=0;n<nmatrices;n++){
-
-    for(int i=0; i<4; i++)
-      for(int k=0; k<4; k++){
-        c[i*4:4]+=a[i*4 + k]*b[k*4:4];
-    }
+  for(int m=0;m<iter;m++)
+    for(int n=0;n<nmatrices;n++){
+      matrixmul_mnk_AN(c, a, b)
   }
-}
   time2_AN=mytime();
 
 
