@@ -87,7 +87,7 @@ int main(void){
     printf("%f %f\n", dx*i,f1[i]);
   }
 #else
-  printf("time with AN = %f\n", time2-time1);
-  printf("time with out AN = %f\n", time2_noAN-time1_noAN);
+  printf("time no AN = %f\n", time2_noAN-time1_noAN);
+  printf("time sì AN = %f\n", time2-time1);
 #endif
 }
