@@ -69,5 +69,6 @@ int main(void){
 
   printf("time cblas = %f s\n", time2-time1);
   printf("time AN = %f s\n", time2_AN-time1_AN);
-  printf("perf = %f GFLOPs\n", (2.0*mnk*mnk*mnk*nmatrices*iter)/(time2-time1)/1000.0/1000.0/1000.0);
+  printf("perf cblas = %f GFLOPs\n", (2.0*mnk*mnk*mnk*nmatrices*iter)/(time2-time1)/1000.0/1000.0/1000.0);
+  printf("perf AN = %f GFLOPs\n", (2.0*mnk*mnk*mnk*nmatrices*iter)/(time2_AN-time1_AN)/1000.0/1000.0/1000.0);
 }
