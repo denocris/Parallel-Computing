@@ -49,9 +49,13 @@ int main(void){
 
   time1=mytime();
   for(int t=0;t<iter;t++){
-    for(int i=1;i<size-1;i++){
+
+    /*for(int i=1;i<size-1;i++){
       f2[i]=a*(f1[i+1]+f1[i-1])+b*f1[i]-f2[i];
-    }
+    }*/
+    // In Array Notation
+    f2[1:size-1]=a*(f1[2:size]+f1[0:size-2])+b*f1[1:size-1]-f2[1:size-1];
+    
     tmpptr=f1;
     f1=f2;
     f2=tmpptr;
