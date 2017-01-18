@@ -26,6 +26,7 @@ int main(void){
   double* b= (double*) _mm_malloc(sizeof(double)*size,64);
   double* c= (double*) _mm_malloc(sizeof(double)*size,64);
   double time1,time2;
+  double time1_AN,time2_AN;
   for(int i=0;i<size;i++){
     a[i]=rand();
     b[i]=rand();
@@ -42,8 +43,21 @@ int main(void){
   }
   time2=mytime();
 
+  for(int i=0;i<size;i++){
+    c[i]=rand();
+  }
+
+  time1_AN=mytime();
+  for(int n=0;n<iter;n++){
+    for(int i=0;i<size; i++){
+      c[i]+=a[i][0:size]*b[0:size][i]
+    }
+  }
+  time2_AN=mytime();
 
 
-  printf("time = %f s\n", time2-time1);
+
+  printf("time no AN = %f s\n", time2-time1);
+  printf("time sì AN = %f s\n", time2_AN-time1_AN);
   printf("perf = %f GFLOPs\n", (2.0*mnk*mnk*mnk*nmatrices*iter)/(time2-time1)/1000.0/1000.0/1000.0);
 }
