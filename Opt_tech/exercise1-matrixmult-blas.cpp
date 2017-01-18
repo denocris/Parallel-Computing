@@ -58,7 +58,7 @@ int main(void){
   time1_AN=mytime();
   for(int m=0;m<iter;m++)
     for(int n=0;n<nmatrices;n++){
-      matrixmul_mnk_AN(c, a, b)
+      matrixmul_mnk_AN(c, a, b);
   }
   time2_AN=mytime();
 
