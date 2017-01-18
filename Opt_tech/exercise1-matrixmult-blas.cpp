@@ -58,14 +58,13 @@ int main(void){
   // time2_N=mytime();
 
   time1_AN=mytime();
-  for(int n=0;n<iter;n++){
-    for(int i=0; i<size; i++)
-      for(int k=0; k<size; k++){
-        c[i*size:size]+=a[i*size:size]*b[k:size:size];
+  for(int n=0;n<nmatrices;n++){
+    for(int i=0; i<4; i++)
+      for(int k=0; k<4; k++){
+        c[i*4:4]+=a[i*4 + k]*b[k*4:4];
     }
   }
   time2_AN=mytime();
-
 
 
   printf("time cblas = %f s\n", time2-time1);
