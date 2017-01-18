@@ -26,7 +26,7 @@ int main(void){
   double* b= (double*) _mm_malloc(sizeof(double)*size,64);
   double* c= (double*) _mm_malloc(sizeof(double)*size,64);
   double time1,time2;
-  double time1_AN,time2_AN;
+  double time1_N,time2_N;
   for(int i=0;i<size;i++){
     a[i]=rand();
     b[i]=rand();
@@ -47,17 +47,27 @@ int main(void){
     c[i]=rand();
   }
 
-  time1_AN=mytime();
+  time1_N=mytime();
   for(int n=0;n<iter;n++){
-    for(int i=0;i<size; i++){
-      c[i]+=a[i][0:size]*b[0:size][i]
+    for(int i=0;i<size; i++)
+      for(int j=0;j<size; j++)
+        for(int k=0;k<size; k++){
+      c[i][j] +=  a[i][k]*b[k][j];
     }
   }
-  time2_AN=mytime();
+  time2_N=mytime();
+
+  // time1_AN=mytime();
+  // for(int n=0;n<iter;n++){
+  //   for(int i=0;i<size; i++){
+  //     c[i]+=a[i][0:size]*b[0:size][i];
+  //   }
+  // }
+  // time2_AN=mytime();
 
 
 
-  printf("time no AN = %f s\n", time2-time1);
-  printf("time sì AN = %f s\n", time2_AN-time1_AN);
+  printf("time cblas = %f s\n", time2-time1);
+  printf("time normal = %f s\n", time2_N-time1_N);
   printf("perf = %f GFLOPs\n", (2.0*mnk*mnk*mnk*nmatrices*iter)/(time2-time1)/1000.0/1000.0/1000.0);
 }
