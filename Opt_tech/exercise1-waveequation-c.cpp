@@ -22,6 +22,7 @@ int main(void){
   double c;
   double dx,dt;
   double time1,time2;
+    double time1_noAN,time2_noAN;
 
   // set some meaningfull parameters
   c=0.1;
