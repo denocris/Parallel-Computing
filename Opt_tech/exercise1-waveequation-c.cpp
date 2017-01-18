@@ -47,12 +47,29 @@ int main(void){
   f1[size/2]=0.1;
   f2[size/2]=-0.1;
 
+  time1_noAN=mytime();
+  for(int t=0;t<iter;t++){
+    for(int i=1;i<size-1;i++){
+      f2[i]=a*(f1[i+1]+f1[i-1])+b*f1[i]-f2[i];
+    }
+
+    tmpptr=f1;
+    f1=f2;
+    f2=tmpptr;
+  }
+  time2_noAN=mytime();
+
+  // In Array Notation
+  f1[0:size] = 0;
+  f2[0:size] = 0;
+
+  // make some delta peaks
+  f1[size/2]=0.1;
+  f2[size/2]=-0.1;
+
   time1=mytime();
   for(int t=0;t<iter;t++){
 
-    /*for(int i=1;i<size-1;i++){
-      f2[i]=a*(f1[i+1]+f1[i-1])+b*f1[i]-f2[i];
-    }*/
     // In Array Notation
     f2[1:size-1]=a*(f1[2:size]+f1[0:size-2])+b*f1[1:size-1]-f2[1:size-1];
 
@@ -62,12 +79,14 @@ int main(void){
   }
   time2=mytime();
 
+
   // int case we need to look at the result
 #ifdef _PRINT_
   for(int i=0;i<size;i++){
     printf("%f %f\n", dx*i,f1[i]);
   }
 #else
-  printf("time = %f\n", time2-time1);
+  printf("time with AN = %f\n", time2-time1);
+  printf("time with out AN = %f\n", time2_noAN-time1_noAN);
 #endif
 }
