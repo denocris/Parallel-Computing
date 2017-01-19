@@ -84,9 +84,9 @@ int main(void){
 
   //-------------- CBLAS IMPLEMENTATION ----------
 
-  for(int i=0;i<size;i++){
-    c[i]=rand();
-  }
+  // for(int i=0;i<size;i++){
+  //   c[i]=rand();
+  // }
 
   time1_cblas=mytime();
   for(int n=0;n<iter;n++){
@@ -100,9 +100,9 @@ int main(void){
 
   //-------------- ARRAY NOTATION IMPL ----------
 
-  for(int i=0;i<size;i++){
-    c[i]=rand();
-  }
+  // for(int i=0;i<size;i++){
+  //   c[i]=rand();
+  // }
 
   time1_AN=mytime();
   for(int m=0;m<iter;m++)
@@ -115,9 +115,9 @@ int main(void){
 
   //-------------- INTRINSIC IMPLEMENTATION ----------
 
-  for(int i=0;i<size;i++){
-    c[i]=rand();
-  }
+  // for(int i=0;i<size;i++){
+  //   c[i]=rand();
+  // }
 
   time1_intrinsic=mytime();
   for(int m=0;m<iter;m++)
