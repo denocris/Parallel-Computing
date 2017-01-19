@@ -44,15 +44,14 @@ int main(void){
   for(int n=0;n<iter;n++){
     for(int i=0;i<size;i+=mnk*mnk){
       matrixmul_mnk(&c[i],&a[i],&b[i]);
-	  //you code goes here
-      //matrixmul_mnk_opt1(&c[i],&a[i],&b[i]);
     }
   }
   time2=mytime();
 
-  for(int i=0;i<size;i++){
-    c[i]=rand();
-  }
+  printf("matrix C1 = %f s\n", &c[3]);
+  // for(int i=0;i<size;i++){
+  //   c[i]=rand();
+  // }
 
 
   time1_AN=mytime();
@@ -61,6 +60,8 @@ int main(void){
       matrixmul_mnk_AN(c, a, b);
   }
   time2_AN=mytime();
+
+    printf("matrix C2 = %f s\n", &c[3]);
 
 
   printf("time cblas = %f s\n", time2-time1);
