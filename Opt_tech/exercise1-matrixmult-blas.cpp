@@ -50,6 +50,8 @@ int main(void){
     c[i]=rand();
   }
 
+  printf("matrix C0 = %f \n", c[3]);
+
   //-------------- NAIVE IMPLEMENTATION ----------
 
   time1=mytime();
