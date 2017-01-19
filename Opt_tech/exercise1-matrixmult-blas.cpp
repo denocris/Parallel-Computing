@@ -54,7 +54,7 @@ void matrixmul_mnk_AN(double* c,double* a,double* b){
 void matrixmul_intrinsic(double* c, double* a, double* b){
   __m256d a_line, b_line, c_line;
       for(int i=0;i<mnk*mnk;i+=4){
-        //c_line = _mm256_load_pd(c);
+        c_line = _mm256_load_pd(&c[i*4]);
         for (int j = 0; j < 4; j++) {
             a_line = _mm256_load_pd(&a[j*4]); //a_line = vec4(column(a,j))
             b_line = _mm256_set1_pd(b[i+j]); //b_line = vec4(b[i][j])
