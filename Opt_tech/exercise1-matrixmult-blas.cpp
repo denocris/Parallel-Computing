@@ -52,7 +52,7 @@ void matrixmul_intrinsic(double* c, double* a, double* b){
 }
 
 int main(void){
-  int iter=5;
+  int iter=10;
   int nmatrices=100000;
   int size=mnk*mnk*nmatrices;
   double* a= (double*) _mm_malloc(sizeof(double)*size,64);
@@ -73,7 +73,7 @@ int main(void){
   //-------------- NAIVE IMPLEMENTATION ----------
 
   time1=mytime();
-  for(int m=0;m<iter;m++)
+  for(int n=0;n<iter;n++)
     for(int i=0;i<size;i+=mnk*mnk){
       matrixmul_naive(&c[i], &a[i], &b[i]);
   }
@@ -105,7 +105,7 @@ int main(void){
   }
 
   time1_AN=mytime();
-  for(int m=0;m<iter;m++)
+  for(int n=0;n<iter;n++)
     for(int i=0;i<size;i+=mnk*mnk){
       matrixmul_mnk_AN(&c[i],&a[i],&b[i]);
   }
@@ -120,7 +120,7 @@ int main(void){
   }
 
   time1_intrinsic=mytime();
-  for(int m=0;m<iter;m++)
+  for(int n=0;n<iter;n++)
     for(int i=0;i<size;i+=mnk*mnk){
       matrixmul_intrinsic(&c[i],&a[i],&b[i]);
   }
