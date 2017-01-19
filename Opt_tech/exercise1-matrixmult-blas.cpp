@@ -122,7 +122,7 @@ int main(void){
   time1_intrinsic=mytime();
   for(int m=0;m<iter;m++)
     for(int n=0;n<nmatrices;n++){
-      matrixmul_intrinsic(c, a, b);
+      matrixmul_intrinsic(a,b,c);
   }
   time2_intrinsic=mytime();
 
