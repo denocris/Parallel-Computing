@@ -63,9 +63,9 @@ int main(void){
   double time1_AN,time2_AN;
   double time1_intrinsic,time2_intrinsic;
   for(int i=0;i<size;i++){
-    a[i]=rand()/100000000;
-    b[i]=rand()/100000000;
-    c[i]=rand()/100000000;
+    a[i]=2;
+    b[i]=3;
+    c[i]=rand();
   }
 
   printf("matrix C0 = %f \n", c[3]);
