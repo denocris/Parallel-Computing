@@ -48,7 +48,7 @@ int main(void){
   }
   time2=mytime();
 
-  printf("matrix C1 = %f s\n", &c[3]);
+  printf("matrix C1 = %f s\n", c[3]);
   // for(int i=0;i<size;i++){
   //   c[i]=rand();
   // }
@@ -61,7 +61,7 @@ int main(void){
   }
   time2_AN=mytime();
 
-    printf("matrix C2 = %f s\n", &c[3]);
+    printf("matrix C2 = %f s\n", c[3]);
 
 
   printf("time cblas = %f s\n", time2-time1);
