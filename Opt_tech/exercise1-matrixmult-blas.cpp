@@ -79,7 +79,7 @@ int main(void){
   }
   time2=mytime();
 
-  printf("matrix C1 = %f \n", c[3]);
+  printf("matrix C1 = %f \n", c[0]);
 
 
   //-------------- CBLAS IMPLEMENTATION ----------
@@ -96,7 +96,7 @@ int main(void){
   }
   time2_cblas=mytime();
 
-  printf("matrix C2 = %f \n", c[3]);
+  printf("matrix C2 = %f \n", c[0]);
 
   //-------------- ARRAY NOTATION IMPL ----------
 
@@ -111,7 +111,7 @@ int main(void){
   }
   time2_AN=mytime();
 
-  printf("matrix C3 = %f \n", c[3]);
+  printf("matrix C3 = %f \n", c[0]);
 
   //-------------- INTRINSIC IMPLEMENTATION ----------
 
@@ -126,7 +126,7 @@ int main(void){
   }
   time2_intrinsic=mytime();
 
-  printf("matrix C4 = %f \n", c[3]);
+  printf("matrix C4 = %f \n", c[0]);
 
   //--------------------------------------------------
 
