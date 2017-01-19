@@ -35,11 +35,11 @@ void matrixmul_mnk_AN(double* c,double* a,double* b){
       }
 }
 
-void matrixmul_intrinsic(double* a, double* b, double* c){
+void matrixmul_intrinsic(double* c, double* a, double* b){
   __m256d a_line, b_line, c_line;
     for(int i=0;i<mnk*mnk;i+=4){
     // unroll loop to avoid initializing c_line to zero
-        a_line = _mm256_load_pd(a); //a_line =vec4(column(a,0))
+        a_line = _mm256_load_pd(a[0:16]); //a_line =vec4(column(a,0))
         b_line = _mm256_set1_pd(b[i]); //b_line = vec4(b[i][0]), Broadcast double-precision (64-bit) floating-point value b[i]
         c_line = _mm256_mul_pd(a_line,b_line);
         for (int j = 1; j < 4; j++) {
@@ -122,7 +122,7 @@ int main(void){
   time1_intrinsic=mytime();
   for(int m=0;m<iter;m++)
     for(int n=0;n<nmatrices;n++){
-      matrixmul_intrinsic(a,b,c);
+      matrixmul_intrinsic(c,a,b);
   }
   time2_intrinsic=mytime();
 
