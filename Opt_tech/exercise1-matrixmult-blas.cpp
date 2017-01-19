@@ -2,7 +2,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <stdlib.h>
-#include "xmmintrin.h" // for the intrinsic implementation
+#include <immintrin.h> // for the intrinsic implementation
 
 #include "mkl.h"
 
