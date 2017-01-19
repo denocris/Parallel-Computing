@@ -16,6 +16,7 @@ double mytime(){
 
 void matrixmul_naive(double* c,double* a,double* b){
     //for(int i=0; i<4; i++)
+    int i;
       for(int j=0; j<4; j++)
         for(int k=0; k<4; k++){
           c[i*4 + j]+=a[i*4 + k]*b[k*4 + j];
