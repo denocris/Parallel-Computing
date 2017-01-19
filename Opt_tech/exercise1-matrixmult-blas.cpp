@@ -48,10 +48,10 @@ int main(void){
   }
   time2=mytime();
 
-  //printf("matrix C1 = %f \n", c[3]);
+  printf("matrix C1 = %f \n", c[3]);
    for(int i=0;i<size;i++){
      c[i]=rand();
-  }
+   }
 
 
   time1_AN=mytime();
