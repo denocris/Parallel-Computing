@@ -52,7 +52,7 @@ void matrixmul_intrinsic(double* c, double* a, double* b){
 }
 
 int main(void){
-  int iter=10;
+  int iter=5;
   int nmatrices=100000;
   int size=mnk*mnk*nmatrices;
   double* a= (double*) _mm_malloc(sizeof(double)*size,64);
