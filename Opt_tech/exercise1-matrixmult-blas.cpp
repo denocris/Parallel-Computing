@@ -2,7 +2,7 @@
 #include <sys/time.h>
 #include <time.h>
 #include <stdlib.h>
-#include <xmmintrin.h>
+#include <xmmintrin.h> // for the intrinsic implementation
 #include "mkl.h"
 
 int mnk=4;
@@ -32,6 +32,22 @@ void matrixmul_mnk_AN(double* c,double* a,double* b){
       for(int k=0; k<4; k++){
         c[i*4:4]+=a[i*4 + k]*b[k*4:4];
       }
+}
+
+void matrixmil_intrinsic(double* a, double* b, double* c){
+  __m256d a_line, b_line, c_line;
+    for(int i=0;i<mnk*mnk;i+=4){
+    // unroll loop to avoid initializing c_line to zero
+        a_line = _mm256_load_pd(a); //a_line =vec4(column(a,0))
+        b_line = _mm256_set1_pd(b[i]); //b_line = vec4(b[i][0]), Broadcast double-precision (64-bit) floating-point value b[i]
+        c_line = _mm256_mul_pd(a_line,b_line);
+        for (int j = 1; j < 4; j++) {
+            a_line = _mm256_load_pd(&a[j*4]); //a_line = vec4(column(a,j))
+            b_line = _mm256_set1_pd(b[i+j]); //b_line = vec4(b[i][j])
+            c_line = _mm256_add_pd(_mm256_mul_pd(a_line,b_line), c_line); //r_line += a_line*b_line
+        }
+        _mm256_store_pd(&c[i], c_line);// r[i] = r_line
+    }
 }
 
 int main(void){
@@ -95,12 +111,29 @@ int main(void){
 
   printf("matrix C3 = %f \n", c[3]);
 
-  //------------------------------------------
+  //-------------- INTRINSIC IMPLEMENTATION ----------
+
+  for(int i=0;i<size;i++){
+    c[i]=rand();
+  }
+
+  time1_intrinsic=mytime();
+  for(int m=0;m<iter;m++)
+    for(int n=0;n<nmatrices;n++){
+      matrixmul_intrinsic(c, a, b);
+  }
+  time2_intrinsic=mytime();
+
+  printf("matrix C4 = %f \n", c[3]);
+
+  //--------------------------------------------------
 
   printf("time naive = %f s\n", time2-time1);
   printf("time cblas = %f s\n", time2_cblas-time1_cblas);
   printf("time AN = %f s\n", time2_AN-time1_AN);
+  printf("time Intrs = %f s\n", time2_intrinsic-time1_intrinsic);
   printf("perf naive = %f GFLOPs\n", (2.0*mnk*mnk*mnk*nmatrices*iter)/(time2-time1)/1000.0/1000.0/1000.0);
   printf("perf cblas = %f GFLOPs\n", (2.0*mnk*mnk*mnk*nmatrices*iter)/(time2_cblas-time1_cblas)/1000.0/1000.0/1000.0);
   printf("perf AN = %f GFLOPs\n", (2.0*mnk*mnk*mnk*nmatrices*iter)/(time2_AN-time1_AN)/1000.0/1000.0/1000.0);
+  printf("perf Intrs = %f GFLOPs\n", (2.0*mnk*mnk*mnk*nmatrices*iter)/(time2_intrinsic-time1_intrinsic)/1000.0/1000.0/1000.0);
 }
