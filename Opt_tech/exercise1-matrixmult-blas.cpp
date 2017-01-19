@@ -96,7 +96,7 @@ int main(void){
   }
   time2_cblas=mytime();
 
-  printf("matrix C1 = %f \n", c[3]);
+  printf("matrix C2 = %f \n", c[3]);
 
   //-------------- ARRAY NOTATION IMPL ----------
 
@@ -106,8 +106,8 @@ int main(void){
 
   time1_AN=mytime();
   for(int m=0;m<iter;m++)
-    for(int n=0;n<nmatrices;n++){
-      matrixmul_mnk_AN(c, a, b);
+    for(int i=0;i<size;i+=mnk*mnk){
+      matrixmul_mnk_AN(&c[i],&a[i],&b[i]);
   }
   time2_AN=mytime();
 
