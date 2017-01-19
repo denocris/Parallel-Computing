@@ -121,8 +121,8 @@ int main(void){
 
   time1_intrinsic=mytime();
   for(int m=0;m<iter;m++)
-    for(int n=0;n<nmatrices;n++){
-      matrixmul_intrinsic(c,a,b);
+    for(int i=0;i<size;i+=mnk*mnk){
+      matrixmul_intrinsic(&c[i],&a[i],&b[i]);
   }
   time2_intrinsic=mytime();
 
