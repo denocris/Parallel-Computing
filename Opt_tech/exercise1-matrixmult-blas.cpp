@@ -63,9 +63,9 @@ int main(void){
   double time1_AN,time2_AN;
   double time1_intrinsic,time2_intrinsic;
   for(int i=0;i<size;i++){
-    a[i]=rand()/10000000000;
-    b[i]=rand()/10000000000;
-    c[i]=rand()/10000000000;
+    a[i]=rand()/100000000;
+    b[i]=rand()/100000000;
+    c[i]=rand()/100000000;
   }
 
   printf("matrix C0 = %f \n", c[3]);
@@ -116,7 +116,7 @@ int main(void){
   //-------------- INTRINSIC IMPLEMENTATION ----------
 
   for(int i=0;i<size;i++){
-    c[i]=rand()/10000000000;
+    c[i]=rand()/100000000;
   }
 
   time1_intrinsic=mytime();
