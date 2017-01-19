@@ -2,7 +2,8 @@
 #include <sys/time.h>
 #include <time.h>
 #include <stdlib.h>
-#include <xmmintrin.h> // for the intrinsic implementation
+#include "xmmintrin.h" // for the intrinsic implementation
+
 #include "mkl.h"
 
 int mnk=4;
@@ -60,6 +61,7 @@ int main(void){
   double time1,time2;
   double time1_cblas,time2_cblas;
   double time1_AN,time2_AN;
+  double time1_intrinsic,time2_intrinsic;
   for(int i=0;i<size;i++){
     a[i]=rand();
     b[i]=rand();
