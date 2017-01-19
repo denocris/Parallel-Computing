@@ -74,8 +74,8 @@ int main(void){
 
   time1=mytime();
   for(int m=0;m<iter;m++)
-    for(int n=0;n<nmatrices;n++){
-      matrixmul_naive(c, a, b);
+    for(int i=0;i<size;i+=mnk*mnk){
+      matrixmul_naive(&c[i], &a[i], &b[i]);
   }
   time2=mytime();
 
@@ -107,7 +107,7 @@ int main(void){
   time1_AN=mytime();
   for(int m=0;m<iter;m++)
     for(int n=0;n<nmatrices;n++){
-      matrixmul_mnk_AN(&c, &a, &b);
+      matrixmul_mnk_AN(c, a, b);
   }
   time2_AN=mytime();
 
