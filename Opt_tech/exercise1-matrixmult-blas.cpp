@@ -73,10 +73,11 @@ int main(void){
   //-------------- NAIVE IMPLEMENTATION ----------
 
   time1=mytime();
-  for(int n=0;n<iter;n++)
+  for(int n=0;n<iter;n++){
     for(int i=0;i<size;i+=mnk*mnk){
       matrixmul_naive(&c[i], &a[i], &b[i]);
   }
+}
   time2=mytime();
 
   printf("matrix C1 = %f \n", c[0]);
@@ -105,10 +106,11 @@ int main(void){
   }
 
   time1_AN=mytime();
-  for(int n=0;n<iter;n++)
+  for(int n=0;n<iter;n++){
     for(int i=0;i<size;i+=mnk*mnk){
       matrixmul_mnk_AN(&c[i],&a[i],&b[i]);
   }
+}
   time2_AN=mytime();
 
   printf("matrix C3 = %f \n", c[0]);
@@ -120,10 +122,11 @@ int main(void){
   }
 
   time1_intrinsic=mytime();
-  //for(int n=0;n<iter;n++)
+  for(int n=0;n<iter;n++){
     for(int i=0;i<size;i+=mnk*mnk){
       matrixmul_intrinsic(&c[i],&a[i],&b[i]);
   }
+}
   time2_intrinsic=mytime();
 
   printf("matrix C4 = %f \n", c[0]);
