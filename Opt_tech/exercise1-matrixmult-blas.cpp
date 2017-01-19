@@ -122,7 +122,7 @@ int main(void){
   }
 
   time1_intrinsic=mytime();
-  for(int n=0;n<iter;n++){
+  for(int n=0;n<5;n++){
     for(int i=0;i<size;i+=mnk*mnk){
       matrixmul_intrinsic(&c[i],&a[i],&b[i]);
   }
