@@ -35,7 +35,7 @@ void matrixmul_mnk_AN(double* c,double* a,double* b){
       }
 }
 
-void matrixmil_intrinsic(double* a, double* b, double* c){
+void matrixmul_intrinsic(double* a, double* b, double* c){
   __m256d a_line, b_line, c_line;
     for(int i=0;i<mnk*mnk;i+=4){
     // unroll loop to avoid initializing c_line to zero
